@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../core/utils/assets_manager.dart';
 import '../../../core/utils/color_manger.dart';
+import '../../../core/utils/routes/app_routes.dart';
 import '../../../core/utils/values_manager.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _goNext() async {
-    //Get.offNamed(Routes.logIn);
+    Get.offNamed(Routes.logIn);
   }
 
   @override
@@ -49,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
-        child: Image.asset(ImagesAssets.logoApp),
+        child: Image.asset(ImagesAssets.logoNameApp),
       )),
       bottomSheet: const Padding(
         padding: EdgeInsets.only(bottom: AppPadding.p16),

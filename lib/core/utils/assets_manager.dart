@@ -3,9 +3,10 @@ const String imagePath = "assets/images";
 const String iconPath = "assets/icons";
 
 class ImagesAssets {
-  static const String logoApp = "$imagePath/logo_name_app.png";
+  static const String logoNameApp = "$imagePath/logo_name_app.png";
 }
 
 class IconsAssets {
-  static const String report1 = "$iconPath/report1.png";
+  static const String logoApp = "$iconPath/logo_app.png";
+  static const String userIcon = "$iconPath/user.png";
 }
