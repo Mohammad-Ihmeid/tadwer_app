@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/auth/presentation/components/custom_text_field.dart';
 import 'package:tadwer_app/auth/presentation/controller/login_controller.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
+import 'package:tadwer_app/core/utils/routes/app_routes.dart';
 import 'package:tadwer_app/core/utils/values_manager.dart';
 
 class LogInScreen extends StatelessWidget {
@@ -92,7 +94,9 @@ class LogInScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 3.h),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Get.offAllNamed(Routes.facilityType);
+                  },
                   child: Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(

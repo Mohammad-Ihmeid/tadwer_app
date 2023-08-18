@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tadwer_app/auth/presentation/screens/log_in_screen.dart';
+import 'package:tadwer_app/users/presentation/screens/facility_type_screen.dart';
 
 import '../../../auth/presentation/controller/login_controller.dart';
 import '../../../auth/presentation/screens/splash_screen.dart';
@@ -25,6 +26,12 @@ class AppPages {
           builder: (context, child) {
             return const LogInScreen();
           }),
+      transitionDuration: const Duration(milliseconds: 300),
+      transition: Transition.downToUp,
+    ),
+    GetPage(
+      name: Paths.facilityType,
+      page: () => const FacilityTypeScreen(),
       transitionDuration: const Duration(milliseconds: 300),
       transition: Transition.downToUp,
     ),

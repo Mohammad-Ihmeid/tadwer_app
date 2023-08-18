@@ -7,7 +7,7 @@ ThemeData getApplecationTheme() {
   return ThemeData(
     useMaterial3: true,
     fontFamily: "DGAgnadeen",
-    scaffoldBackgroundColor: ColorManager.lightGreen,
+    scaffoldBackgroundColor: ColorManager.white,
     textTheme: TextTheme(
         // headlineLarge: TextStyle(
         //     fontSize: 12.sp,
