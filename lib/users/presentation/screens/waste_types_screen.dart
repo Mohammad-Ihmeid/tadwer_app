@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
+import 'package:tadwer_app/core/utils/routes/app_routes.dart';
 import 'package:tadwer_app/core/utils/values_manager.dart';
 import 'package:tadwer_app/users/data/models/waste_type_model.dart';
 import 'package:tadwer_app/users/presentation/components/custom_app_bar.dart';
@@ -175,16 +176,17 @@ class WasteTypesScreen extends StatelessWidget {
                           ])),
                       SizedBox(height: 3.h),
                       Center(
-                          child: CustomHeader.customHeader(
-                              child: Text(
-                                "طلب تدوير",
+                          child: GestureDetector(
+                        onTap: () => Get.toNamed(Routes.orderConfirmation),
+                        child: CustomHeader.customHeader(
+                            child: Text("طلب تدوير",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: ColorManager.white,
                                     fontSize: 12.sp,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              color: ColorManager.lightGreen))
+                                    fontWeight: FontWeight.w500)),
+                            color: ColorManager.lightGreen),
+                      ))
                     ]))));
   }
 }

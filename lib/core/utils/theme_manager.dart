@@ -8,6 +8,8 @@ ThemeData getApplecationTheme() {
     useMaterial3: true,
     fontFamily: "DGAgnadeen",
     scaffoldBackgroundColor: ColorManager.white,
+    bottomSheetTheme:
+        const BottomSheetThemeData(backgroundColor: Colors.transparent),
     textTheme: TextTheme(
         // headlineLarge: TextStyle(
         //     fontSize: 12.sp,

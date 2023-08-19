@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tadwer_app/auth/presentation/screens/log_in_screen.dart';
+import 'package:tadwer_app/users/presentation/controller/date_controller.dart';
 import 'package:tadwer_app/users/presentation/controller/waste_types_controller.dart';
 import 'package:tadwer_app/users/presentation/screens/facility_type_screen.dart';
+import 'package:tadwer_app/users/presentation/screens/order_confirmation_screen.dart';
 import 'package:tadwer_app/users/presentation/screens/waste_types_screen.dart';
 
 import '../../../auth/presentation/controller/login_controller.dart';
@@ -43,6 +45,16 @@ class AppPages {
           create: (_) => WasteTypeProvider(),
           builder: (context, child) {
             return const WasteTypesScreen();
+          }),
+      transitionDuration: const Duration(milliseconds: 300),
+      transition: Transition.downToUp,
+    ),
+    GetPage(
+      name: Paths.orderConfirmation,
+      page: () => MultiProvider(
+          providers: [ChangeNotifierProvider(create: (_) => DateController())],
+          builder: (context, child) {
+            return const OrderConfirmationScreen();
           }),
       transitionDuration: const Duration(milliseconds: 300),
       transition: Transition.downToUp,

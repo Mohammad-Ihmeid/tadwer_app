@@ -17,4 +17,6 @@ class IconsAssets {
   static const String multipleUsers = "$iconPath/multiple-users-silhouette.png";
   static const String luggageCart = "$iconPath/luggage-cart.png";
   static const String factory = "$iconPath/factory.png";
+  static const String calendar = "$iconPath/calendar.png";
+  static const String map = "$iconPath/map.png";
 }
