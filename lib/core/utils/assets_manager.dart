@@ -19,4 +19,6 @@ class IconsAssets {
   static const String factory = "$iconPath/factory.png";
   static const String calendar = "$iconPath/calendar.png";
   static const String map = "$iconPath/map.png";
+  //Json Icons
+  static const String pin = "$iconPath/pin.json";
 }

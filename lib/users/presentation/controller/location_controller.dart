@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -34,6 +35,7 @@ class LocationController with ChangeNotifier {
       target: position,
       zoom: 17.5,
     )));
+    await getAddress(position);
     notifyListeners();
   }
 
@@ -57,5 +59,11 @@ class LocationController with ChangeNotifier {
 
     return await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best);
+  }
+
+  Future getAddress(LatLng position) async {
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+    Placemark address = placemarks[0];
   }
 }
