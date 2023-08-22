@@ -6,6 +6,7 @@ abstract class Routes {
   static const facilityType = Paths.facilityType;
   static const wasteType = Paths.wasteType;
   static const orderConfirmation = Paths.orderConfirmation;
+  static const locationUsers = Paths.locationUsers;
 }
 
 abstract class Paths {
@@ -16,4 +17,5 @@ abstract class Paths {
   static const facilityType = '/facilityType';
   static const wasteType = '/wasteType';
   static const orderConfirmation = '/orderConfirmation';
+  static const locationUsers = '/locationUsers';
 }

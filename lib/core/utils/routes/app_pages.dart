@@ -2,8 +2,10 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tadwer_app/auth/presentation/screens/log_in_screen.dart';
 import 'package:tadwer_app/users/presentation/controller/date_controller.dart';
+import 'package:tadwer_app/users/presentation/controller/location_controller.dart';
 import 'package:tadwer_app/users/presentation/controller/waste_types_controller.dart';
 import 'package:tadwer_app/users/presentation/screens/facility_type_screen.dart';
+import 'package:tadwer_app/users/presentation/screens/location_screen.dart';
 import 'package:tadwer_app/users/presentation/screens/order_confirmation_screen.dart';
 import 'package:tadwer_app/users/presentation/screens/waste_types_screen.dart';
 
@@ -55,6 +57,18 @@ class AppPages {
           providers: [ChangeNotifierProvider(create: (_) => DateController())],
           builder: (context, child) {
             return const OrderConfirmationScreen();
+          }),
+      transitionDuration: const Duration(milliseconds: 300),
+      transition: Transition.downToUp,
+    ),
+    GetPage(
+      name: Paths.locationUsers,
+      page: () => MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => LocationController())
+          ],
+          builder: (context, child) {
+            return const LocationScreen();
           }),
       transitionDuration: const Duration(milliseconds: 300),
       transition: Transition.downToUp,
