@@ -86,12 +86,20 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 ? ColorManager.white
                 : ColorManager.white),
         hintText: widget.hintText,
-        hintStyle: TextStyle(color: ColorManager.white, fontSize: 15.sp),
+        hintStyle: TextStyle(
+            color: ColorManager.white,
+            fontSize: 15.sp,
+            shadows: const [
+              Shadow(
+                  color: ColorManager.darkGreen,
+                  blurRadius: 1,
+                  offset: Offset(1, 1))
+            ]),
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: ColorManager.white),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorManager.white),
+          borderSide: BorderSide(color: Color.fromARGB(255, 173, 123, 123)),
         ),
       ),
     );

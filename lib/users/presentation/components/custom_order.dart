@@ -26,10 +26,15 @@ class CustomOrder {
         Text(
           title,
           style: TextStyle(
-            color: ColorManager.lightGreen,
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w900,
-          ),
+              color: ColorManager.lightGreen,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w900,
+              shadows: const [
+                Shadow(
+                    color: ColorManager.darkGreen,
+                    blurRadius: 0.3,
+                    offset: Offset(1, 0.5))
+              ]),
         ),
       ],
     );

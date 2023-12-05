@@ -37,11 +37,16 @@ class LogInScreen extends StatelessWidget {
                   'CUSTOMER LOGIN',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: ColorManager.white,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w100,
-                    letterSpacing: 5,
-                  ),
+                      color: ColorManager.white,
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w100,
+                      letterSpacing: 5,
+                      shadows: const [
+                        Shadow(
+                            color: ColorManager.darkGreen,
+                            blurRadius: 1,
+                            offset: Offset(1, 1))
+                      ]),
                 ),
                 SizedBox(height: 5.h),
                 CustomTextField(

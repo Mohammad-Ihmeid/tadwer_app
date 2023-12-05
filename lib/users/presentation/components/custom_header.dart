@@ -13,14 +13,15 @@ class CustomHeader {
     Color color = ColorManager.gray,
   }) {
     return Container(
-      width: width.w,
-      padding: EdgeInsets.symmetric(
-        vertical: paddingVertical,
-        horizontal: paddingHorizontal,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppBorderRadius.s15),
-        color: color,
+      width: 60.w,
+      padding: const EdgeInsets.symmetric(
+          vertical: AppPadding.p8, horizontal: AppPadding.p16),
+      decoration: const BoxDecoration(
+        color: ColorManager.darkGreen,
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(AppBorderRadius.s20),
+          bottomRight: Radius.circular(AppBorderRadius.s20),
+        ),
       ),
       child: child,
     );

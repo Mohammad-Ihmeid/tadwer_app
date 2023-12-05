@@ -38,6 +38,12 @@ ThemeData getApplecationTheme() {
             color: ColorManager.white,
             fontWeight: FontWeight.w100,
             letterSpacing: 1.2,
+            shadows: const [
+              Shadow(
+                  color: ColorManager.darkGreen,
+                  blurRadius: 1,
+                  offset: Offset(1, 1))
+            ],
             decorationThickness: 0.0)),
   );
 }

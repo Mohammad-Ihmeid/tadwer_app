@@ -10,6 +10,8 @@ import 'package:tadwer_app/users/presentation/components/custom_app_bar.dart';
 import 'package:tadwer_app/users/presentation/components/custom_header.dart';
 import 'package:tadwer_app/users/presentation/controller/waste_types_controller.dart';
 
+import '../../../core/constanses.dart';
+
 class WasteTypesScreen extends StatelessWidget {
   const WasteTypesScreen({super.key});
 
@@ -20,52 +22,53 @@ class WasteTypesScreen extends StatelessWidget {
             child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(height: 3.h),
                       CustomAppBar.appBar(),
                       SizedBox(height: 3.h),
-                      Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: AppPadding.p16),
-                          child: CustomHeader.customHeader(
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Image.asset(
-                                      Get.arguments["Image"],
-                                      width: 10.w,
-                                      height: 10.h,
-                                    ),
-                                    Text(Get.arguments["Name"],
-                                        style: TextStyle(
-                                            fontSize: 12.sp,
-                                            color: ColorManager.lightGreen,
-                                            fontWeight: FontWeight.w900))
-                                  ]),
-                              width: 100,
-                              paddingVertical: AppPadding.p4)),
+                      CustomHeader.customHeader(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Image.asset(
+                                  AppConstanse().box.read("Image"),
+                                  width: 10.w,
+                                  height: 10.h,
+                                ),
+                                Text(AppConstanse().box.read("Name"),
+                                    style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: ColorManager.white,
+                                        fontWeight: FontWeight.w900,
+                                        shadows: const [
+                                          Shadow(
+                                              color: ColorManager.lightGreen,
+                                              blurRadius: 1,
+                                              offset: Offset(1, 1))
+                                        ]))
+                              ]),
+                          width: 100,
+                          paddingVertical: AppPadding.p4),
                       SizedBox(height: 3.h),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: AppPadding.p30,
-                          right: AppPadding.p16,
-                        ),
-                        child: CustomHeader.customHeader(
-                            child: Text(
-                              "أنواع المخلفات التي تمتلكها",
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: ColorManager.lightGreen,
+                      CustomHeader.customHeader(
+                          child: Text(
+                            "أنواع المخلفات التي تمتلكها",
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                                color: ColorManager.white,
                                 fontSize: 10.sp,
                                 fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                            width: 80,
-                            paddingVertical: AppPadding.p16),
-                      ),
+                                shadows: const [
+                                  Shadow(
+                                      color: ColorManager.lightGreen,
+                                      blurRadius: 1,
+                                      offset: Offset(1, 1))
+                                ]),
+                          ),
+                          width: 80,
+                          paddingVertical: AppPadding.p16),
                       SizedBox(height: 3.h),
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -109,7 +112,13 @@ class WasteTypesScreen extends StatelessWidget {
                                       style: TextStyle(
                                           fontSize: 15.sp,
                                           fontWeight: FontWeight.w500,
-                                          color: ColorManager.lightGreen),
+                                          color: ColorManager.lightGreen,
+                                          shadows: const [
+                                            Shadow(
+                                                color: ColorManager.darkGreen,
+                                                blurRadius: 1,
+                                                offset: Offset(1, 1))
+                                          ]),
                                     ),
                                   ],
                                 );
@@ -119,12 +128,15 @@ class WasteTypesScreen extends StatelessWidget {
                       SizedBox(height: 3.h),
                       Container(
                           height: 7.h,
+                          padding: const EdgeInsets.only(
+                            right: AppPadding.p16,
+                          ),
                           margin: const EdgeInsets.symmetric(
                             horizontal: AppPadding.p16,
                           ),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius:
-                                BorderRadius.circular(AppBorderRadius.s15),
+                                BorderRadius.all(Radius.elliptical(50, 50)),
                             color: ColorManager.gray,
                           ),
                           child: Row(mainAxisSize: MainAxisSize.min, children: [
@@ -172,21 +184,40 @@ class WasteTypesScreen extends StatelessWidget {
                                 style: TextStyle(
                                     color: ColorManager.lightGreen,
                                     fontSize: 12.sp,
-                                    fontWeight: FontWeight.w500))
+                                    fontWeight: FontWeight.w500,
+                                    shadows: const [
+                                      Shadow(
+                                          color: ColorManager.lightGreen,
+                                          blurRadius: 1,
+                                          offset: Offset(1, 1))
+                                    ]))
                           ])),
                       SizedBox(height: 3.h),
                       Center(
-                          child: GestureDetector(
-                        onTap: () => Get.toNamed(Routes.orderConfirmation),
-                        child: CustomHeader.customHeader(
-                            child: Text("طلب تدوير",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: ColorManager.white,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w500)),
-                            color: ColorManager.lightGreen),
-                      ))
+                        child: GestureDetector(
+                            onTap: () => Get.toNamed(Routes.orderConfirmation),
+                            child: Container(
+                                width: 60.w,
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: AppPadding.p8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      AppBorderRadius.s15),
+                                  color: ColorManager.darkGreen,
+                                ),
+                                child: Text("طلب تدوير",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: ColorManager.white,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w500,
+                                        shadows: const [
+                                          Shadow(
+                                              color: ColorManager.lightGreen,
+                                              blurRadius: 1,
+                                              offset: Offset(1, 1))
+                                        ])))),
+                      )
                     ]))));
   }
 }

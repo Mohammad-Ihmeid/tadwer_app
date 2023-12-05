@@ -9,8 +9,6 @@ import 'package:tadwer_app/core/utils/values_manager.dart';
 import 'package:tadwer_app/users/presentation/components/custom_order.dart';
 import 'package:tadwer_app/users/presentation/controller/date_controller.dart';
 
-import '../components/custom_header.dart';
-
 class OrderConfirmationScreen extends StatelessWidget {
   const OrderConfirmationScreen({super.key});
 
@@ -48,33 +46,46 @@ class OrderConfirmationScreen extends StatelessWidget {
             SizedBox(height: 3.h),
             CustomOrder.rowButton(
                 title: "موقع الاستلام",
-                onTap: () => Get.toNamed(Routes.locationUsers),
+                onTap: () => Get.offNamed(Routes.locationUsers),
                 child: Image.asset(IconsAssets.map, width: 10.w)),
             SizedBox(height: 3.h),
             Text(
-              "سيتم تقدير كمية المخالفات من قبل المندوب",
+              "سيتم تقدير كمية المخلفات من قبل المندوب",
               style: TextStyle(
                   color: ColorManager.lightGreen,
                   fontSize: 10.sp,
-                  fontWeight: FontWeight.w100),
+                  fontWeight: FontWeight.w100,
+                  shadows: const [
+                    Shadow(
+                      color: ColorManager.darkGreen,
+                      blurRadius: 1,
+                    )
+                  ]),
             ),
-            CustomHeader.customHeader(
-                child: Text("تأكيد الطلب",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: ColorManager.white,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w500)),
-                paddingVertical: AppPadding.p16,
-                width: 100,
-                color: ColorManager.lightGreen),
-            SizedBox(height: 6.h),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Image.asset(
-                ImagesAssets.logoNameApp,
-                width: 80.w,
+            Container(
+              width: 60.w,
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppBorderRadius.s15),
+                color: ColorManager.darkGreen,
               ),
+              child: Text("تأكيد الطلب",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: ColorManager.white,
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500,
+                      shadows: const [
+                        Shadow(
+                            color: ColorManager.lightGreen,
+                            blurRadius: 1,
+                            offset: Offset(1, 1))
+                      ])),
+            ),
+            SizedBox(height: 6.h),
+            Image.asset(
+              ImagesAssets.logoNameApp,
+              width: 60.w,
             )
           ],
         ),

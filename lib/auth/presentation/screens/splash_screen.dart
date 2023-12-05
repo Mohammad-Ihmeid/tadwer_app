@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../core/utils/assets_manager.dart';
 import '../../../core/utils/color_manger.dart';
@@ -49,9 +50,9 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
-        child: Image.asset(ImagesAssets.logoNameApp),
+          child: Image.asset(
+        ImagesAssets.logoNameApp,
+        width: 60.w,
       )),
       bottomSheet: const Padding(
         padding: EdgeInsets.only(bottom: AppPadding.p16),
