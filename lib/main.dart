@@ -3,12 +3,14 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sizer/sizer.dart';
+import 'package:tadwer_app/core/services/services_locator.dart';
 
 import 'core/utils/routes/app_pages.dart';
 import 'core/utils/theme_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  ServicesLocator().init();
   await GetStorage.init();
   runApp(const MyApp());
 }

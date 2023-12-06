@@ -30,7 +30,7 @@ class AppPages {
       page: () => ChangeNotifierProvider(
           create: (context) => LogInProvider(),
           builder: (context, child) {
-            return const LogInScreen();
+            return LogInScreen();
           }),
       transitionDuration: const Duration(milliseconds: 300),
       transition: Transition.downToUp,

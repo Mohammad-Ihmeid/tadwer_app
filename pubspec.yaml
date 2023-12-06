@@ -4,11 +4,19 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: '>=3.2.0 <4.0.0'
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  equatable: ^2.0.5
+  dartz: ^0.10.1
+  http: ^1.1.2
+  get_it: ^7.6.4
+  flutter_bloc: ^8.1.3
+
+
+
   get: ^4.6.5
   sizer: ^2.0.15
   get_storage: ^2.1.1
