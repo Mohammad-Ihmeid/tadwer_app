@@ -5,11 +5,13 @@ const String iconPath = "assets/icons";
 class ImagesAssets {
   static const String logoNameApp = "$imagePath/logo_name_app.png";
   static const String backgroundImage = "$imagePath/background_image.jpeg";
+  static const String splashImage = "$imagePath/splash_image.jpeg";
 }
 
 class IconsAssets {
   static const String logoApp = "$iconPath/logo_app.png";
   static const String userIcon = "$iconPath/user.png";
+
   //Home Icons
   static const String openBook = "$iconPath/open-book.png";
   static const String waiter = "$iconPath/waiter.png";
