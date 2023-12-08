@@ -6,8 +6,8 @@ import 'package:tadwer_app/core/utils/assets_manager.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
 import 'package:tadwer_app/core/utils/routes/app_routes.dart';
 import 'package:tadwer_app/core/utils/values_manager.dart';
-import 'package:tadwer_app/users/presentation/components/custom_order.dart';
-import 'package:tadwer_app/users/presentation/controller/date_controller.dart';
+import 'package:tadwer_app/company/presentation/components/widget/custom_order.dart';
+import 'package:tadwer_app/company/presentation/controller/date_controller.dart';
 
 class OrderConfirmationScreen extends StatelessWidget {
   const OrderConfirmationScreen({super.key});

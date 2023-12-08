@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../core/utils/color_manger.dart';
-import '../../../core/utils/values_manager.dart';
+import '../../../../core/utils/color_manger.dart';
+import '../../../../core/utils/values_manager.dart';
 
 class CustomHeader {
   static Widget customHeader({

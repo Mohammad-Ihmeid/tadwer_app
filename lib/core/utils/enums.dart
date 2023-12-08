@@ -4,3 +4,9 @@ enum RequestState {
   success,
   error,
 }
+
+enum CompanyTypeRequestState {
+  loading,
+  loaded,
+  error,
+}

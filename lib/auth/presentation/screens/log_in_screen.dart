@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/auth/presentation/components/custom_text_field.dart';
 import 'package:tadwer_app/auth/presentation/controller/login_bloc/login_bloc.dart';
-import 'package:tadwer_app/auth/presentation/controller/login_controller.dart';
 import 'package:tadwer_app/core/services/services_locator.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
@@ -132,17 +129,13 @@ class LogInScreen extends StatelessWidget {
               Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Consumer<LogInProvider>(
-                    builder: (context, provider, child) {
-                      return Checkbox(
-                        value: provider.checkbox,
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        visualDensity: const VisualDensity(horizontal: -4),
-                        onChanged: (check) => provider.changeCheckbox(check!),
-                        side: const BorderSide(color: ColorManager.white),
-                        activeColor: ColorManager.darkGreen,
-                      );
-                    },
+                  Checkbox(
+                    value: false,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    visualDensity: const VisualDensity(horizontal: -4),
+                    onChanged: (check) => false,
+                    side: const BorderSide(color: ColorManager.white),
+                    activeColor: ColorManager.darkGreen,
                   ),
                   SizedBox(width: 2.w),
                   Text(

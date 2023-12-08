@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../components/custom_picker.dart';
+import '../components/widget/custom_picker.dart';
 
 class DateController with ChangeNotifier {
   DateTime date = DateTime.now();

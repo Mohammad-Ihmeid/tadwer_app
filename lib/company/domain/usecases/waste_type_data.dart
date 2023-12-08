@@ -1,4 +1,4 @@
-import 'package:tadwer_app/users/data/models/waste_type_model.dart';
+import 'package:tadwer_app/company/data/models/waste_type_model.dart';
 
 class WasteTypeData {
   static List<WasteTypeModel> listWasteType = [

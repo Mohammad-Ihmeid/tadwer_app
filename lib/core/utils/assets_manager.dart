@@ -4,6 +4,7 @@ const String iconPath = "assets/icons";
 
 class ImagesAssets {
   static const String logoNameApp = "$imagePath/logo_name_app.png";
+  static const String backgroundImage = "$imagePath/background_image.jpeg";
 }
 
 class IconsAssets {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/color_manger.dart';
+import '../../../../core/utils/color_manger.dart';
 
 class CustomStatmentsPicker {
   Future<DateTime?> showPicker(context, dateTime) async {

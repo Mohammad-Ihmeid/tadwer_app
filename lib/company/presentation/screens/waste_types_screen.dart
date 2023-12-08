@@ -5,10 +5,10 @@ import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
 import 'package:tadwer_app/core/utils/routes/app_routes.dart';
 import 'package:tadwer_app/core/utils/values_manager.dart';
-import 'package:tadwer_app/users/data/models/waste_type_model.dart';
-import 'package:tadwer_app/users/presentation/components/custom_app_bar.dart';
-import 'package:tadwer_app/users/presentation/components/custom_header.dart';
-import 'package:tadwer_app/users/presentation/controller/waste_types_controller.dart';
+import 'package:tadwer_app/company/data/models/waste_type_model.dart';
+import 'package:tadwer_app/company/presentation/components/widget/custom_app_bar.dart';
+import 'package:tadwer_app/company/presentation/components/widget/custom_header.dart';
+import 'package:tadwer_app/company/presentation/controller/waste_types_controller.dart';
 
 import '../../../core/constanses.dart';
 
