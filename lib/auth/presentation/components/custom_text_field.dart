@@ -91,7 +91,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             fontSize: 15.sp,
             shadows: const [
               Shadow(
-                  color: ColorManager.darkGreen,
+                  color: ColorManager.darkBink,
                   blurRadius: 1,
                   offset: Offset(1, 1))
             ]),

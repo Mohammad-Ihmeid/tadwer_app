@@ -31,7 +31,7 @@ class CustomOrder {
               fontWeight: FontWeight.w900,
               shadows: const [
                 Shadow(
-                    color: ColorManager.darkGreen,
+                    color: ColorManager.darkBink,
                     blurRadius: 0.3,
                     offset: Offset(1, 0.5))
               ]),

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
-import 'package:tadwer_app/core/utils/routes/app_routes.dart';
+import 'package:tadwer_app/core/global/routes/app_routes.dart';
 import 'package:tadwer_app/core/utils/values_manager.dart';
 import 'package:tadwer_app/company/data/models/waste_type_model.dart';
 import 'package:tadwer_app/company/presentation/components/widget/custom_app_bar.dart';
@@ -99,13 +99,13 @@ class WasteTypesScreen extends StatelessWidget {
                                           const VisualDensity(horizontal: -4),
                                       activeColor: ColorManager.lightGreen
                                           .withOpacity(0.7),
-                                      checkColor: ColorManager.darkGreen,
+                                      checkColor: ColorManager.darkBink,
                                       shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
                                             AppBorderRadius.s5,
                                           ),
                                           side: const BorderSide(
-                                              color: ColorManager.darkGreen)),
+                                              color: ColorManager.darkBink)),
                                     ),
                                     Text(
                                       item.wasteType,
@@ -115,7 +115,7 @@ class WasteTypesScreen extends StatelessWidget {
                                           color: ColorManager.lightGreen,
                                           shadows: const [
                                             Shadow(
-                                                color: ColorManager.darkGreen,
+                                                color: ColorManager.darkBink,
                                                 blurRadius: 1,
                                                 offset: Offset(1, 1))
                                           ]),
@@ -203,7 +203,7 @@ class WasteTypesScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
                                       AppBorderRadius.s15),
-                                  color: ColorManager.darkGreen,
+                                  color: ColorManager.darkBink,
                                 ),
                                 child: Text("طلب تدوير",
                                     textAlign: TextAlign.center,

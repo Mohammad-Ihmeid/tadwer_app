@@ -3,10 +3,11 @@ abstract class Routes {
 
   static const splash = Paths.splash;
   static const logIn = Paths.logIn;
-  static const facilityType = Paths.facilityType;
+  static const companyType = Paths.companyType;
+  static const categoryType = Paths.categoryType;
+
   static const wasteType = Paths.wasteType;
   static const orderConfirmation = Paths.orderConfirmation;
-  static const locationUsers = Paths.locationUsers;
 }
 
 abstract class Paths {
@@ -14,8 +15,10 @@ abstract class Paths {
   static const splash = '/splash';
   static const logIn = '/logIn';
   //Users
+  static const companyType = '/companyType';
+  static const categoryType = '/categoryType';
+
   static const facilityType = '/facilityType';
   static const wasteType = '/wasteType';
   static const orderConfirmation = '/orderConfirmation';
-  static const locationUsers = '/locationUsers';
 }

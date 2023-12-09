@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/company/presentation/controller/company_type_bloc/company_type_bloc.dart';
+import 'package:tadwer_app/company/presentation/screens/category_screen.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
 import 'package:tadwer_app/core/utils/enums.dart';
-import 'package:tadwer_app/core/utils/routes/app_routes.dart';
 import 'package:tadwer_app/core/utils/values_manager.dart';
 
 class CompanyTypeComponent extends StatelessWidget {
@@ -19,14 +18,14 @@ class CompanyTypeComponent extends StatelessWidget {
           previous.companyTypeRequestState != current.companyTypeRequestState,
       builder: (context, state) {
         switch (state.companyTypeRequestState) {
-          case CompanyTypeRequestState.loading:
+          case RequestState.loading:
             return const SizedBox(
                 height: 170.0,
                 child: Center(
                     child: CircularProgressIndicator(
                   color: ColorManager.white,
                 )));
-          case CompanyTypeRequestState.error:
+          case RequestState.error:
             return Column(
               children: [
                 Image.asset(
@@ -38,7 +37,7 @@ class CompanyTypeComponent extends StatelessWidget {
                     "حدث خطأ أثناء أحضار البيانات الرجاء أعادة المحاولة لاحقا")
               ],
             );
-          case CompanyTypeRequestState.loaded:
+          case RequestState.loaded:
             return Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -53,7 +52,13 @@ class CompanyTypeComponent extends StatelessWidget {
                       final element = state.companyType[index];
                       return GestureDetector(
                         onTap: () {
-                          Get.toNamed(Routes.wasteType);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext conext) =>
+                                  CategoryScreen(nameCompany: element.name),
+                            ),
+                          );
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

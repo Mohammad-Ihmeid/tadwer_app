@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/auth/presentation/components/custom_text_field.dart';
 import 'package:tadwer_app/auth/presentation/controller/login_bloc/login_bloc.dart';
 import 'package:tadwer_app/core/services/services_locator.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
+import 'package:tadwer_app/core/global/routes/app_routes.dart';
 import 'package:tadwer_app/core/utils/enums.dart';
-import 'package:tadwer_app/core/utils/routes/app_routes.dart';
 import 'package:tadwer_app/core/utils/values_manager.dart';
 
 class LogInScreen extends StatelessWidget {
@@ -22,23 +21,22 @@ class LogInScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<LoginBloc>(),
       child: Scaffold(
-        backgroundColor: ColorManager.lightGreen,
         body: SafeArea(
           child: BlocListener<LoginBloc, LoginState>(
             listener: (context, state) {
-              if (state.requestState == RequestState.error) {
+              if (state.requestState == SignInRequestState.error) {
                 ScaffoldMessenger.of(context).clearSnackBars();
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(state.errorMessage)));
-              } else if (state.requestState == RequestState.success) {
-                Get.offAllNamed(Routes.facilityType);
+              } else if (state.requestState == SignInRequestState.success) {
+                Navigator.pushReplacementNamed(context, Routes.companyType);
               }
             },
             child: BlocBuilder<LoginBloc, LoginState>(
               builder: (context, state) {
                 return Stack(
                   children: [
-                    if (state.requestState == RequestState.loading)
+                    if (state.requestState == SignInRequestState.loading)
                       Container(
                         color: Colors.transparent,
                         child: Center(
@@ -48,6 +46,14 @@ class LogInScreen extends StatelessWidget {
                               child: const CircularProgressIndicator()),
                         ),
                       ),
+                    SizedBox(
+                      height: 100.h,
+                      width: 100.w,
+                      child: Image.asset(
+                        ImagesAssets.logInBackgroundImage,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                     Center(
                       child: Padding(
                         padding: const EdgeInsets.all(AppPadding.p16),
@@ -72,15 +78,6 @@ class LogInScreen extends StatelessWidget {
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         children: [
-          Container(
-              padding: const EdgeInsets.all(AppPadding.p16),
-              decoration: const BoxDecoration(
-                color: ColorManager.darkGreen,
-                shape: BoxShape.circle,
-              ),
-              child:
-                  Image.asset(IconsAssets.userIcon, width: 12.w, height: 12.h)),
-          SizedBox(height: 2.h),
           Text(
             'CUSTOMER LOGIN',
             textAlign: TextAlign.center,
@@ -91,7 +88,7 @@ class LogInScreen extends StatelessWidget {
                 letterSpacing: 5,
                 shadows: const [
                   Shadow(
-                      color: ColorManager.darkGreen,
+                      color: ColorManager.darkBink,
                       blurRadius: 1,
                       offset: Offset(1, 1))
                 ]),
@@ -135,7 +132,7 @@ class LogInScreen extends StatelessWidget {
                     visualDensity: const VisualDensity(horizontal: -4),
                     onChanged: (check) => false,
                     side: const BorderSide(color: ColorManager.white),
-                    activeColor: ColorManager.darkGreen,
+                    activeColor: ColorManager.darkBink,
                   ),
                   SizedBox(width: 2.w),
                   Text(
@@ -163,7 +160,7 @@ class LogInScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 vertical: AppPadding.p8,
               ),
-              color: ColorManager.darkGreen,
+              color: ColorManager.black,
               child: Text(
                 "LOGIN",
                 textAlign: TextAlign.center,

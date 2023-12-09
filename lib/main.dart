@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/core/services/services_locator.dart';
 
-import 'core/utils/routes/app_pages.dart';
+import 'core/global/routes/app_pages.dart';
 import 'core/utils/theme_manager.dart';
 
 void main() async {
@@ -20,11 +19,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
-      return GetMaterialApp(
+      return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: getApplecationTheme(),
         initialRoute: AppPages.initial,
-        getPages: AppPages.routes,
+        routes: AppPages.routes,
       );
     });
   }

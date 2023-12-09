@@ -10,40 +10,32 @@ ThemeData getApplecationTheme() {
     scaffoldBackgroundColor: ColorManager.white,
     bottomSheetTheme:
         const BottomSheetThemeData(backgroundColor: Colors.transparent),
-    textTheme: TextTheme(
-        // headlineLarge: TextStyle(
-        //     fontSize: 12.sp,
-        //     color: ColorManager.primaryNavyBlue,
-        //     fontWeight: FontWeight.w700),
-        // headlineMedium: const TextStyle(
-        //   color: ColorManager.white,
-        // ),
-        // titleLarge: TextStyle(
-        //     fontSize: 10.sp,
-        //     color: ColorManager.primaryNavyBlue,
-        //     fontWeight: FontWeight.w500,
-        //     decorationThickness: 0.0),
-        // titleMedium: TextStyle(
-        //     fontSize: 10.sp,
-        //     color: ColorManager.primary,
-        //     fontWeight: FontWeight.w400,
-        //     decorationThickness: 0.0),
-        // displayMedium: TextStyle(
-        //     fontSize: 12.sp,
-        //     color: ColorManager.primary,
-        //     fontWeight: FontWeight.w600,
-        //     decorationThickness: 0.0),
-        displaySmall: TextStyle(
-            fontSize: 12.sp,
-            color: ColorManager.white,
-            fontWeight: FontWeight.w100,
-            letterSpacing: 1.2,
-            shadows: const [
-              Shadow(
-                  color: ColorManager.darkGreen,
-                  blurRadius: 1,
-                  offset: Offset(1, 1))
-            ],
-            decorationThickness: 0.0)),
+    textTheme: _textTheme(),
   );
+}
+
+TextTheme _textTheme() {
+  return TextTheme(
+      headlineMedium: TextStyle(
+        color: ColorManager.white,
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w500,
+      ),
+      titleMedium: TextStyle(
+        color: ColorManager.white,
+        fontSize: 12.sp,
+        fontWeight: FontWeight.w400,
+      ),
+      displaySmall: TextStyle(
+          fontSize: 12.sp,
+          color: ColorManager.white,
+          fontWeight: FontWeight.w100,
+          letterSpacing: 1.2,
+          shadows: const [
+            Shadow(
+                color: ColorManager.darkBink,
+                blurRadius: 1,
+                offset: Offset(1, 1))
+          ],
+          decorationThickness: 0.0));
 }

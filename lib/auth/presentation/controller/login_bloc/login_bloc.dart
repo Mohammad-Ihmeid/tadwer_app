@@ -18,7 +18,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   FutureOr<void> _checkLogInEvent(
       CheckLogInEvent event, Emitter<LoginState> emit) async {
     emit(state.copyWith(
-      requestState: RequestState.loading,
+      requestState: SignInRequestState.loading,
     ));
     final result = await checkLogInUseCase(
       CheckLogInParameters(name: event.name, password: event.password),
@@ -26,13 +26,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     result.fold((l) {
       emit(state.copyWith(
-        requestState: RequestState.error,
+        requestState: SignInRequestState.error,
         errorMessage: l.message,
       ));
     }, (r) {
       emit(
         state.copyWith(
-          requestState: RequestState.success,
+          requestState: SignInRequestState.success,
           user: r,
         ),
       );

@@ -7,4 +7,6 @@ class ApiConstance {
 
   //Company
   static String allCompanyTypePath = "${baseURL}Company/GetAllCompanyType";
+  //Category
+  static String allCategoryPath = "${baseURL}Category/GetAllCategory";
 }

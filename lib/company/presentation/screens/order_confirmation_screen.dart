@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
-import 'package:tadwer_app/core/utils/routes/app_routes.dart';
 import 'package:tadwer_app/core/utils/values_manager.dart';
 import 'package:tadwer_app/company/presentation/components/widget/custom_order.dart';
 import 'package:tadwer_app/company/presentation/controller/date_controller.dart';
@@ -44,11 +42,6 @@ class OrderConfirmationScreen extends StatelessWidget {
                   ]));
             }),
             SizedBox(height: 3.h),
-            CustomOrder.rowButton(
-                title: "موقع الاستلام",
-                onTap: () => Get.offNamed(Routes.locationUsers),
-                child: Image.asset(IconsAssets.map, width: 10.w)),
-            SizedBox(height: 3.h),
             Text(
               "سيتم تقدير كمية المخلفات من قبل المندوب",
               style: TextStyle(
@@ -57,7 +50,7 @@ class OrderConfirmationScreen extends StatelessWidget {
                   fontWeight: FontWeight.w100,
                   shadows: const [
                     Shadow(
-                      color: ColorManager.darkGreen,
+                      color: ColorManager.darkBink,
                       blurRadius: 1,
                     )
                   ]),
@@ -67,7 +60,7 @@ class OrderConfirmationScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: AppPadding.p8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppBorderRadius.s15),
-                color: ColorManager.darkGreen,
+                color: ColorManager.darkBink,
               ),
               child: Text("تأكيد الطلب",
                   textAlign: TextAlign.center,

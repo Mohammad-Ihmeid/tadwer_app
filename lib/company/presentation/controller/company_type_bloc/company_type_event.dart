@@ -8,3 +8,5 @@ sealed class CompanyTypeEvent extends Equatable {
 }
 
 class GetAllCompanyTypeEvent extends CompanyTypeEvent {}
+
+class GetAllCategoryEvent extends CompanyTypeEvent {}

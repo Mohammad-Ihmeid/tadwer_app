@@ -7,6 +7,7 @@ import 'package:tadwer_app/auth/presentation/controller/login_bloc/login_bloc.da
 import 'package:tadwer_app/company/data/datasource/company_remote_data_source.dart';
 import 'package:tadwer_app/company/data/repository/company_repository.dart';
 import 'package:tadwer_app/company/domain/repository/base_company_repository.dart';
+import 'package:tadwer_app/company/domain/usecases/get_all_category_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_all_company_type_usecase.dart';
 import 'package:tadwer_app/company/presentation/controller/company_type_bloc/company_type_bloc.dart';
 
@@ -16,11 +17,12 @@ class ServicesLocator {
   init() {
     //Bloc
     getIt.registerFactory(() => LoginBloc(getIt()));
-    getIt.registerFactory(() => CompanyTypeBloc(getIt()));
+    getIt.registerFactory(() => CompanyTypeBloc(getIt(), getIt()));
 
     //Use Case
     getIt.registerLazySingleton(() => CheckLogInUseCase(getIt()));
     getIt.registerLazySingleton(() => GetAllCompanyTypeUseCase(getIt()));
+    getIt.registerLazySingleton(() => GetAllCategoryUseCase(getIt()));
 
     //Repository
     getIt.registerLazySingleton<BaseLogInRepository>(

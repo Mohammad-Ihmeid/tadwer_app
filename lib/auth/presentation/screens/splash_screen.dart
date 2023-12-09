@@ -1,11 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/utils/assets_manager.dart';
-import '../../../core/utils/routes/app_routes.dart';
+import '../../../core/global/routes/app_routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _goNext() async {
-    Get.offNamed(Routes.logIn);
+    Navigator.pushReplacementNamed(context, Routes.logIn);
   }
 
   @override

@@ -11,6 +11,6 @@ class CompanyTypeModel extends CompanyType {
       CompanyTypeModel(
         compId: json["compId"],
         name: json["name"],
-        uIdRef: json["uIdRef"] ?? "",
+        uIdRef: json["uIdRef"].toString(),
       );
 }

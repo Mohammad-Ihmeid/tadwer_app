@@ -1,11 +1,11 @@
-enum RequestState {
+enum SignInRequestState {
   normal,
   loading,
   success,
   error,
 }
 
-enum CompanyTypeRequestState {
+enum RequestState {
   loading,
   loaded,
   error,

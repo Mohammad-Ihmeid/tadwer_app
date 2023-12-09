@@ -17,7 +17,7 @@ class CustomHeader {
       padding: const EdgeInsets.symmetric(
           vertical: AppPadding.p8, horizontal: AppPadding.p16),
       decoration: const BoxDecoration(
-        color: ColorManager.darkGreen,
+        color: ColorManager.darkBink,
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(AppBorderRadius.s20),
           bottomRight: Radius.circular(AppBorderRadius.s20),
