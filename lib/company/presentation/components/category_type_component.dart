@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/company/presentation/controller/company_type_bloc/company_type_bloc.dart';
+import 'package:tadwer_app/company/presentation/screens/waste_screen.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
 import 'package:tadwer_app/core/utils/enums.dart';
@@ -62,22 +63,34 @@ class CategoryTypeComponent extends StatelessWidget {
                   itemCount: state.categoryType.length,
                   itemBuilder: (context, index) {
                     final element = state.categoryType[index];
-                    return Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: AppMargin.m30,
-                        vertical: AppMargin.m8,
-                      ),
-                      decoration: BoxDecoration(
-                          color: ColorManager.darkBink,
-                          borderRadius:
-                              BorderRadius.circular(AppBorderRadius.s15)),
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: AppPadding.p4),
-                        child: Center(
-                          child: Text(
-                            element.name,
-                            style: Theme.of(context).textTheme.titleMedium,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WasteScreen(
+                                categoryName: element.name,
+                                catId: element.catId,
+                              ),
+                            ));
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: AppMargin.m30,
+                          vertical: AppMargin.m8,
+                        ),
+                        decoration: BoxDecoration(
+                            color: ColorManager.darkBink,
+                            borderRadius:
+                                BorderRadius.circular(AppBorderRadius.s15)),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: AppPadding.p4),
+                          child: Center(
+                            child: Text(
+                              element.name,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
                           ),
                         ),
                       ),

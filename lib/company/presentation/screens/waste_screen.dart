@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sizer/sizer.dart';
+import 'package:tadwer_app/company/presentation/components/waste_type_component.dart';
+import 'package:tadwer_app/company/presentation/components/widget/custom_app_bar.dart';
+import 'package:tadwer_app/company/presentation/components/widget/custom_header.dart';
+import 'package:tadwer_app/company/presentation/controller/waste_bloc/waste_bloc.dart';
+import 'package:tadwer_app/core/services/services_locator.dart';
+import 'package:tadwer_app/core/utils/assets_manager.dart';
+
+class WasteScreen extends StatelessWidget {
+  final String categoryName;
+  final int catId;
+  const WasteScreen({
+    super.key,
+    required this.categoryName,
+    required this.catId,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          getIt<WasteBloc>()..add(GetWasteByCategoryEvent(catId)),
+      child: Scaffold(
+        body: SafeArea(
+            child: Stack(
+          children: [
+            SizedBox(
+              width: 100.w,
+              height: 100.h,
+              child: Image.asset(
+                ImagesAssets.backgroundImage,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 3.h),
+                CustomAppBar.appBar(),
+                SizedBox(height: 3.h),
+                CustomHeader.customHeader(
+                    child: Text(
+                  categoryName,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                )),
+                SizedBox(height: 5.h),
+                const Expanded(child: WasteTypeComponent()),
+              ],
+            )
+          ],
+        )),
+      ),
+    );
+  }
+}

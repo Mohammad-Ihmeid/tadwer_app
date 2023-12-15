@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:tadwer_app/company/data/models/category_model.dart';
+import 'package:tadwer_app/company/data/models/waste_model.dart';
+import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
 import 'package:tadwer_app/core/error/exceptions.dart';
 import 'package:tadwer_app/core/network/api_constance.dart';
 import 'package:tadwer_app/core/network/error_message_model.dart';
@@ -11,6 +13,9 @@ abstract class BaseCompanyRemoteDataSource {
   Future<List<CompanyTypeModel>> getAllCompanyType();
 
   Future<List<CategoryModel>> getAllCategory();
+
+  Future<List<WasteModel>> getWasteByCategory(
+      GetWasteByCategoryParameters parameters);
 }
 
 class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
@@ -42,6 +47,30 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
       return List<CategoryModel>.from(
         (responseJson as List).map(
           (e) => CategoryModel.fromJson(e),
+        ),
+      );
+    } else {
+      var responseJson = json.decode(response.body);
+      throw RemoteExceptions(
+        errorMessageModel: ErrorMessageModel.fromJson(responseJson),
+      );
+    }
+  }
+
+  @override
+  Future<List<WasteModel>> getWasteByCategory(
+      GetWasteByCategoryParameters parameters) async {
+    final response = await http.get(
+      Uri.parse(
+        ApiConstance.getWasteByCategoryPath(parameters.catId),
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      var responseJson = json.decode(response.body);
+      return List<WasteModel>.from(
+        (responseJson as List).map(
+          (e) => WasteModel.fromJson(e),
         ),
       );
     } else {
