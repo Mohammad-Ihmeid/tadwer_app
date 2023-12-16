@@ -12,3 +12,22 @@ class GetWasteByCategoryEvent extends WasteEvent {
   @override
   List<Object?> get props => [catId];
 }
+
+class ShowWasteDetEvent extends WasteEvent {
+  final int wasteID;
+  final bool showWasteDet;
+
+  const ShowWasteDetEvent({required this.wasteID, required this.showWasteDet});
+
+  @override
+  List<Object?> get props => [wasteID, showWasteDet];
+}
+
+class AddWasteToBasket extends WasteEvent {
+  final int wasteID;
+
+  const AddWasteToBasket({required this.wasteID});
+
+  @override
+  List<Object?> get props => [wasteID];
+}

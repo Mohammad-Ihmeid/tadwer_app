@@ -8,6 +8,7 @@ class ImagesAssets {
   static const String logInBackgroundImage =
       "$imagePath/logIn_background_image.jpeg";
   static const String splashImage = "$imagePath/splash_image.jpeg";
+  static const String basketImage = "$imagePath/shopping_basket_image.png";
 }
 
 class IconsAssets {

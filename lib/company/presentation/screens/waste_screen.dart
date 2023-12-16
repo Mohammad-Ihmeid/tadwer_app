@@ -23,6 +23,7 @@ class WasteScreen extends StatelessWidget {
       create: (context) =>
           getIt<WasteBloc>()..add(GetWasteByCategoryEvent(catId)),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
             child: Stack(
           children: [
@@ -42,12 +43,48 @@ class WasteScreen extends StatelessWidget {
                 CustomAppBar.appBar(),
                 SizedBox(height: 3.h),
                 CustomHeader.customHeader(
-                    child: Text(
-                  categoryName,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                )),
+                  child: Text(
+                    categoryName,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                ),
                 SizedBox(height: 5.h),
                 const Expanded(child: WasteTypeComponent()),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        children: [
+                          Image.asset(
+                            IconsAssets.logoApp,
+                            color: Colors.white,
+                            width: 20.w,
+                            height: 10.h,
+                          ),
+                          Text(
+                            "طلب تدوير",
+                            style: Theme.of(context).textTheme.titleMedium,
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Image.asset(
+                            ImagesAssets.basketImage,
+                            width: 20.w,
+                            height: 10.h,
+                          ),
+                          Text(
+                            "السلة",
+                            style: Theme.of(context).textTheme.titleMedium,
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                )
               ],
             )
           ],

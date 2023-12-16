@@ -12,6 +12,12 @@ class WasteBloc extends Bloc<WasteEvent, WasteState> {
   GetWasteByCategoryUseCase getWasteByCategoryUseCase;
   WasteBloc(this.getWasteByCategoryUseCase) : super(const WasteState()) {
     on<GetWasteByCategoryEvent>(_getWasteByCategoryEvent);
+    on<ShowWasteDetEvent>((event, emit) {
+      emit(state.copyWith(
+        wasteID: event.wasteID,
+        showWasteDet: event.showWasteDet,
+      ));
+    });
   }
 
   FutureOr<void> _getWasteByCategoryEvent(event, emit) async {

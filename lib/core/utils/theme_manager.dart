@@ -21,6 +21,11 @@ TextTheme _textTheme() {
         fontSize: 16.sp,
         fontWeight: FontWeight.w500,
       ),
+      titleLarge: TextStyle(
+        color: ColorManager.darkBink,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w400,
+      ),
       titleMedium: TextStyle(
         color: ColorManager.white,
         fontSize: 12.sp,
