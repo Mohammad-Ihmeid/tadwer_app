@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:tadwer_app/company/data/models/category_model.dart';
 import 'package:tadwer_app/company/data/models/waste_model.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
-import 'package:tadwer_app/company/domain/usecases/save_waste_det_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/add_basket_usecase.dart';
 import 'package:tadwer_app/core/error/exceptions.dart';
 import 'package:tadwer_app/core/network/api_constance.dart';
 import 'package:tadwer_app/core/network/error_message_model.dart';
@@ -18,7 +18,7 @@ abstract class BaseCompanyRemoteDataSource {
   Future<List<WasteModel>> getWasteByCategory(
       GetWasteByCategoryParameters parameters);
 
-  Future<String> saveWasteDet(SaveWasteDetParameters parameters);
+  Future<String> addBasket(AddBasketParameters parameters);
 }
 
 class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
@@ -85,12 +85,12 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
   }
 
   @override
-  Future<String> saveWasteDet(SaveWasteDetParameters parameters) async {
+  Future<String> addBasket(AddBasketParameters parameters) async {
     final response = await http.post(
       Uri.parse(
-        ApiConstance.saveWasteDetPath,
+        ApiConstance.addBasketPath,
       ),
-      body: json.encode(parameters.wasteDet.toModel().toJson()),
+      body: json.encode(parameters.addBasket.toModel().toJson()),
       headers: {
         "content-type": "application/json",
         "accept": "application/json",

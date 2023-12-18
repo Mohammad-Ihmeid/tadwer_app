@@ -1,20 +1,20 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-import 'package:tadwer_app/company/data/models/save_waste_det_model.dart';
+import 'package:tadwer_app/company/data/models/add_basket_model.dart';
 
-class SaveWasteDet extends Equatable {
+class AddBasket extends Equatable {
   final int basId;
   final int userRef;
   final int wastRef;
 
-  const SaveWasteDet({
+  const AddBasket({
     required this.basId,
     required this.userRef,
     required this.wastRef,
   });
 
-  SaveWasteDetModel toModel() {
-    return SaveWasteDetModel(
+  AddBasketModel toModel() {
+    return AddBasketModel(
       basId: basId,
       userRef: userRef,
       wastRef: wastRef,

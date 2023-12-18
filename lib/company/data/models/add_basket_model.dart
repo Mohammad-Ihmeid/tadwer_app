@@ -1,7 +1,7 @@
-import 'package:tadwer_app/company/domain/entities/save_waste_det.dart';
+import 'package:tadwer_app/company/domain/entities/add_basket.dart';
 
-class SaveWasteDetModel extends SaveWasteDet {
-  const SaveWasteDetModel({
+class AddBasketModel extends AddBasket {
+  const AddBasketModel({
     required super.basId,
     required super.userRef,
     required super.wastRef,
