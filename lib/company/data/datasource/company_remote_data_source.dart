@@ -102,6 +102,7 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
       return responseJson;
     } else {
       var responseJson = json.decode(response.body);
+      print(responseJson);
       throw RemoteExceptions(
         errorMessageModel: ErrorMessageModel.fromJson(responseJson),
       );

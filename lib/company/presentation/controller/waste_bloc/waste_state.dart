@@ -6,6 +6,9 @@ class WasteState extends Equatable {
   final String errorWasteMessage;
   final int wasteID;
   final bool showWasteDet;
+  /* ------------------------------------- */
+  final BottomState addBasketState;
+  final String errorAddBasket;
 
   const WasteState({
     this.listWaste = const [],
@@ -13,6 +16,8 @@ class WasteState extends Equatable {
     this.errorWasteMessage = '',
     this.wasteID = 0,
     this.showWasteDet = false,
+    this.addBasketState = BottomState.prePress,
+    this.errorAddBasket = '',
   });
 
   WasteState copyWith({
@@ -21,6 +26,8 @@ class WasteState extends Equatable {
     String? errorWasteMessage,
     int? wasteID,
     bool? showWasteDet,
+    BottomState? addBasketState,
+    String? errorAddBasket,
   }) {
     return WasteState(
       listWaste: listWaste ?? this.listWaste,
@@ -28,6 +35,8 @@ class WasteState extends Equatable {
       errorWasteMessage: errorWasteMessage ?? this.errorWasteMessage,
       wasteID: wasteID ?? this.wasteID,
       showWasteDet: showWasteDet ?? this.showWasteDet,
+      addBasketState: addBasketState ?? this.addBasketState,
+      errorAddBasket: errorAddBasket ?? this.errorAddBasket,
     );
   }
 
@@ -38,5 +47,7 @@ class WasteState extends Equatable {
         errorWasteMessage,
         wasteID,
         showWasteDet,
+        addBasketState,
+        errorAddBasket,
       ];
 }

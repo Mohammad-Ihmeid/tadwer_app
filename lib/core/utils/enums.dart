@@ -10,3 +10,10 @@ enum RequestState {
   loaded,
   error,
 }
+
+enum BottomState {
+  prePress,
+  loading,
+  error,
+  success,
+}
