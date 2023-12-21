@@ -6,13 +6,22 @@ class User extends Equatable {
   final String name;
   final String password;
   final int id;
+  final int compRef;
 
-  const User(
-      {required this.isAdmin,
-      required this.name,
-      required this.password,
-      required this.id});
+  const User({
+    required this.isAdmin,
+    required this.name,
+    required this.password,
+    required this.id,
+    required this.compRef,
+  });
 
   @override
-  List<Object> get props => [isAdmin, name, password, id];
+  List<Object> get props => [
+        isAdmin,
+        name,
+        password,
+        id,
+        compRef,
+      ];
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/auth/presentation/components/custom_text_field.dart';
 import 'package:tadwer_app/auth/presentation/controller/login_bloc/login_bloc.dart';
+import 'package:tadwer_app/company/presentation/screens/category_screen.dart';
 import 'package:tadwer_app/core/services/services_locator.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
@@ -29,7 +30,17 @@ class LogInScreen extends StatelessWidget {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(state.errorMessage)));
               } else if (state.requestState == SignInRequestState.success) {
-                Navigator.pushReplacementNamed(context, Routes.companyType);
+                if (state.user!.compRef == 0) {
+                  Navigator.pushReplacementNamed(context, Routes.companyType);
+                } else {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const CategoryScreen(nameCompany: "Mohammad"),
+                    ),
+                  );
+                }
               }
             },
             child: BlocBuilder<LoginBloc, LoginState>(
