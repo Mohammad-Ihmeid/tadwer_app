@@ -20,11 +20,13 @@ class CompanyTypeComponent extends StatelessWidget {
         switch (state.companyTypeRequestState) {
           case RequestState.loading:
             return const SizedBox(
-                height: 170.0,
-                child: Center(
-                    child: CircularProgressIndicator(
+              height: 170.0,
+              child: Center(
+                child: CircularProgressIndicator(
                   color: ColorManager.white,
-                )));
+                ),
+              ),
+            );
           case RequestState.error:
             return Column(
               children: [
@@ -44,60 +46,84 @@ class CompanyTypeComponent extends StatelessWidget {
                   horizontal: AppPadding.p16,
                   vertical: AppPadding.p8,
                 ),
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: state.companyType.length,
-                    itemBuilder: (context, index) {
-                      final element = state.companyType[index];
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext conext) =>
-                                  CategoryScreen(nameCompany: element.name),
-                            ),
-                          );
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image.network(
-                              element.uIdRef,
-                              width: 10.w,
-                              height: 10.h,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Image.asset(
-                                  IconsAssets.userIcon,
-                                  width: 10.w,
-                                  height: 10.h,
-                                );
-                              },
-                            ),
-                            Text(
-                              element.name,
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                color: ColorManager.white,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w100,
-                                shadows: const [
-                                  Shadow(
-                                      color: ColorManager.black,
-                                      blurRadius: 1,
-                                      offset: Offset(1, 1))
-                                ],
-                              ),
-                            ),
-                          ],
+                child: BlocConsumer<CompanyTypeBloc, CompanyTypeState>(
+                  listener: (context, state) {
+                    if (state.connectCompanyState == BottomState.success) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext conext) =>
+                              const CategoryScreen(nameCompany: ""),
                         ),
                       );
-                    }),
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state.connectCompanyState == BottomState.loading) {
+                      return const SizedBox(
+                        height: 170.0,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: ColorManager.white,
+                          ),
+                        ),
+                      );
+                    } else {
+                      return listCompanyType(context, state);
+                    }
+                  },
+                ),
               ),
             );
         }
       },
     );
+  }
+
+  Widget listCompanyType(BuildContext context, CompanyTypeState state) {
+    return ListView.builder(
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        itemCount: state.companyType.length,
+        itemBuilder: (context, index) {
+          final element = state.companyType[index];
+          return GestureDetector(
+            onTap: () => context
+                .read<CompanyTypeBloc>()
+                .add(ConnectUserWithCompanyEvent(compRef: element.compId)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.network(
+                  element.uIdRef,
+                  width: 10.w,
+                  height: 10.h,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      IconsAssets.userIcon,
+                      width: 10.w,
+                      height: 10.h,
+                    );
+                  },
+                ),
+                Text(
+                  element.name,
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                    color: ColorManager.white,
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w100,
+                    shadows: const [
+                      Shadow(
+                          color: ColorManager.black,
+                          blurRadius: 1,
+                          offset: Offset(1, 1))
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

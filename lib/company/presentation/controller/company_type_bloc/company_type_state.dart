@@ -7,6 +7,7 @@ class CompanyTypeState extends Equatable {
   final List<Category> categoryType;
   final RequestState requestStateCategory;
   final String errorMessageCategory;
+  final BottomState connectCompanyState;
 
   const CompanyTypeState({
     this.companyType = const [],
@@ -15,6 +16,7 @@ class CompanyTypeState extends Equatable {
     this.categoryType = const [],
     this.requestStateCategory = RequestState.loading,
     this.errorMessageCategory = '',
+    this.connectCompanyState = BottomState.prePress,
   });
 
   CompanyTypeState copyWith({
@@ -24,6 +26,7 @@ class CompanyTypeState extends Equatable {
     List<Category>? categoryType,
     RequestState? requestStateCategory,
     String? errorMessageCategory,
+    BottomState? connectCompanyState,
   }) {
     return CompanyTypeState(
       companyType: companyType ?? this.companyType,
@@ -33,6 +36,7 @@ class CompanyTypeState extends Equatable {
       categoryType: categoryType ?? this.categoryType,
       requestStateCategory: requestStateCategory ?? this.requestStateCategory,
       errorMessageCategory: errorMessageCategory ?? this.errorMessageCategory,
+      connectCompanyState: connectCompanyState ?? this.connectCompanyState,
     );
   }
 
@@ -44,5 +48,6 @@ class CompanyTypeState extends Equatable {
         categoryType,
         requestStateCategory,
         errorMessageCategory,
+        connectCompanyState,
       ];
 }

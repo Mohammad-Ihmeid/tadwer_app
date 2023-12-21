@@ -8,6 +8,7 @@ import 'package:tadwer_app/company/data/datasource/company_remote_data_source.da
 import 'package:tadwer_app/company/data/repository/company_repository.dart';
 import 'package:tadwer_app/company/domain/repository/base_company_repository.dart';
 import 'package:tadwer_app/company/domain/usecases/add_basket_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_all_category_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_all_company_type_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
@@ -20,7 +21,7 @@ class ServicesLocator {
   init() {
     //Bloc
     getIt.registerFactory(() => LoginBloc(getIt()));
-    getIt.registerFactory(() => CompanyTypeBloc(getIt(), getIt()));
+    getIt.registerFactory(() => CompanyTypeBloc(getIt(), getIt(), getIt()));
     getIt.registerFactory(() => WasteBloc(getIt(), getIt()));
 
     //Use Case
@@ -29,6 +30,7 @@ class ServicesLocator {
     getIt.registerLazySingleton(() => GetAllCategoryUseCase(getIt()));
     getIt.registerLazySingleton(() => GetWasteByCategoryUseCase(getIt()));
     getIt.registerLazySingleton(() => AddBasketUseCase(getIt()));
+    getIt.registerLazySingleton(() => ConnectUserWithCompanyUseCase(getIt()));
 
     //Repository
     getIt.registerLazySingleton<BaseLogInRepository>(

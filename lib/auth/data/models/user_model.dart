@@ -16,4 +16,14 @@ class UserModel extends User {
         id: json["uid"],
         compRef: json["compRef"] ?? 0,
       );
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> json = <String, dynamic>{};
+    json['isAdmin'] = isAdmin;
+    json['name'] = name;
+    json['password'] = password;
+    json['uid'] = id;
+    json['compRef'] = compRef;
+    return json;
+  }
 }

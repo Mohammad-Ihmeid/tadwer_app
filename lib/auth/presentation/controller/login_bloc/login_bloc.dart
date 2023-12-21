@@ -36,8 +36,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }, (r) {
       prefs.setString("UserName", r.name);
       prefs.setString("Password", r.password);
-      prefs.setInt("UID", r.id);
+      prefs.setInt("Uid", r.id);
       prefs.setInt("CompRef", r.compRef);
+      prefs.setBool("IsAdmin", r.isAdmin);
       emit(
         state.copyWith(
           requestState: SignInRequestState.success,
@@ -71,6 +72,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       prefs.setString("Password", r.password);
       prefs.setInt("Uid", r.id);
       prefs.setInt("CompRef", r.compRef);
+      prefs.setBool("IsAdmin", r.isAdmin);
       emit(
         state.copyWith(
           requestSplashState: RequestState.loaded,
