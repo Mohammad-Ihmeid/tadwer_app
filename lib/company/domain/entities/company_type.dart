@@ -6,8 +6,11 @@ class CompanyType extends Equatable {
   final String name;
   final String uIdRef;
 
-  const CompanyType(
-      {required this.compId, required this.name, required this.uIdRef});
+  const CompanyType({
+    required this.compId,
+    required this.name,
+    required this.uIdRef,
+  });
 
   @override
   List<Object> get props => [compId, name, uIdRef];

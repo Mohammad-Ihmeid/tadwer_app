@@ -8,6 +8,7 @@ import 'package:tadwer_app/company/domain/entities/company_type.dart';
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_all_category_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_all_company_type_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/core/usecase/base_usecase.dart';
 import 'package:tadwer_app/core/utils/enums.dart';
 
@@ -18,12 +19,15 @@ class CompanyTypeBloc extends Bloc<CompanyTypeEvent, CompanyTypeState> {
   final GetAllCompanyTypeUseCase getAllCompanyTypeUseCase;
   final GetAllCategoryUseCase getAllCategoryUseCase;
   final ConnectUserWithCompanyUseCase connectUserWithCompanyUseCase;
+  final GetCompanyTypeByIdUseCase getCompanyTypeByIdUseCase;
   CompanyTypeBloc(
     this.getAllCompanyTypeUseCase,
     this.getAllCategoryUseCase,
     this.connectUserWithCompanyUseCase,
+    this.getCompanyTypeByIdUseCase,
   ) : super(const CompanyTypeState()) {
     on<GetAllCompanyTypeEvent>(_getAllCompanyTypeEvent);
+    on<GetCompanyTypeByIdEvent>(_getCompanyTypeByIdEvent);
     on<GetAllCategoryEvent>(_getAllCategoryEvent);
     on<ConnectUserWithCompanyEvent>((event, emit) async {
       emit(state.copyWith(connectCompanyState: BottomState.loading));
@@ -45,8 +49,22 @@ class CompanyTypeBloc extends Bloc<CompanyTypeEvent, CompanyTypeState> {
       result.fold((l) {
         emit(state.copyWith(connectCompanyState: BottomState.error));
       }, (r) {
+        prefs.setInt("CompRef", event.compRef);
         emit(state.copyWith(connectCompanyState: BottomState.success));
       });
+    });
+  }
+
+  FutureOr<void> _getCompanyTypeByIdEvent(event, emit) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final compId = prefs.getInt("CompRef") ?? 0;
+
+    final result = await getCompanyTypeByIdUseCase(
+        GetCompanyTypeByIdParameters(compId: compId));
+
+    result.fold((l) {}, (r) {
+      emit(state.copyWith(companyName: r.name));
     });
   }
 

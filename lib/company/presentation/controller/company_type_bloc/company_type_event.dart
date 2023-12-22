@@ -7,6 +7,11 @@ class GetAllCompanyTypeEvent extends CompanyTypeEvent {
   List<Object?> get props => [];
 }
 
+class GetCompanyTypeByIdEvent extends CompanyTypeEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 class GetAllCategoryEvent extends CompanyTypeEvent {
   @override
   List<Object?> get props => [];

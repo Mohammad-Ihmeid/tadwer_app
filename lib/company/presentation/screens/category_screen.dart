@@ -9,13 +9,14 @@ import 'package:tadwer_app/core/services/services_locator.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 
 class CategoryScreen extends StatelessWidget {
-  final String nameCompany;
-  const CategoryScreen({Key? key, required this.nameCompany}) : super(key: key);
+  const CategoryScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<CompanyTypeBloc>()..add(GetAllCategoryEvent()),
+      create: (context) => getIt<CompanyTypeBloc>()
+        ..add(GetAllCategoryEvent())
+        ..add(GetCompanyTypeByIdEvent()),
       lazy: false,
       child: Scaffold(
         body: SafeArea(
@@ -35,11 +36,16 @@ class CategoryScreen extends StatelessWidget {
                 SizedBox(height: 3.h),
                 CustomAppBar.appBar(),
                 SizedBox(height: 3.h),
-                CustomHeader.customHeader(
-                    child: Text(
-                  nameCompany,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                )),
+                BlocBuilder<CompanyTypeBloc, CompanyTypeState>(
+                  builder: (context, state) {
+                    return CustomHeader.customHeader(
+                      child: Text(
+                        state.companyName,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                    );
+                  },
+                ),
                 SizedBox(height: 5.h),
                 const CategoryTypeComponent(),
               ],

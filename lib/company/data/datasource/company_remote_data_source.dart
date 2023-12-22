@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:tadwer_app/company/data/models/category_model.dart';
 import 'package:tadwer_app/company/data/models/waste_model.dart';
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/add_basket_usecase.dart';
 import 'package:tadwer_app/core/error/exceptions.dart';
@@ -13,6 +14,9 @@ import 'package:tadwer_app/company/data/models/company_type_model.dart';
 
 abstract class BaseCompanyRemoteDataSource {
   Future<List<CompanyTypeModel>> getAllCompanyType();
+
+  Future<CompanyTypeModel> getCompanyTypeById(
+      GetCompanyTypeByIdParameters parameters);
 
   Future<List<CategoryModel>> getAllCategory();
 
@@ -37,6 +41,26 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
           (e) => CompanyTypeModel.fromJson(e),
         ),
       );
+    } else {
+      var responseJson = json.decode(response.body);
+      throw RemoteExceptions(
+        errorMessageModel: ErrorMessageModel.fromJson(responseJson),
+      );
+    }
+  }
+
+  @override
+  Future<CompanyTypeModel> getCompanyTypeById(
+      GetCompanyTypeByIdParameters parameters) async {
+    final response = await http.get(
+      Uri.parse(
+        ApiConstance.getCompanyTypeByIdPath(parameters.compId),
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      var responseJson = json.decode(response.body);
+      return CompanyTypeModel.fromJson(responseJson);
     } else {
       var responseJson = json.decode(response.body);
       throw RemoteExceptions(

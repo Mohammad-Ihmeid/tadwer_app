@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/company/presentation/controller/company_type_bloc/company_type_bloc.dart';
-import 'package:tadwer_app/company/presentation/screens/category_screen.dart';
+import 'package:tadwer_app/core/global/routes/app_routes.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
 import 'package:tadwer_app/core/utils/enums.dart';
@@ -49,12 +49,9 @@ class CompanyTypeComponent extends StatelessWidget {
                 child: BlocConsumer<CompanyTypeBloc, CompanyTypeState>(
                   listener: (context, state) {
                     if (state.connectCompanyState == BottomState.success) {
-                      Navigator.push(
+                      Navigator.pushReplacementNamed(
                         context,
-                        MaterialPageRoute(
-                          builder: (BuildContext conext) =>
-                              const CategoryScreen(nameCompany: ""),
-                        ),
+                        Routes.categoryType,
                       );
                     }
                   },

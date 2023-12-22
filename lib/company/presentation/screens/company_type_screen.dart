@@ -36,19 +36,22 @@ class CompanyTypeScreen extends StatelessWidget {
                   SizedBox(height: 3.h),
                   CustomAppBar.appBar(),
                   SizedBox(height: 3.h),
-                  Text(" ما نوع منشئتك ؟",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                          color: ColorManager.white,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w500,
-                          shadows: const [
-                            Shadow(
-                              color: ColorManager.lightGreen,
-                              blurRadius: 1,
-                              offset: Offset(1, 1),
-                            )
-                          ])),
+                  Text(
+                    " ما نوع منشئتك ؟",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      color: ColorManager.white,
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500,
+                      shadows: const [
+                        Shadow(
+                          color: ColorManager.lightGreen,
+                          blurRadius: 1,
+                          offset: Offset(1, 1),
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(height: 3.h),
                   const CompanyTypeComponent(),
                 ],

@@ -14,6 +14,6 @@ class AppPages {
     Routes.splash: (context) => const SplashScreen(),
     Routes.logIn: (context) => LogInScreen(),
     Routes.companyType: (context) => const CompanyTypeScreen(),
-    Routes.categoryType: (context) => const CategoryScreen(nameCompany: ""),
+    Routes.categoryType: (context) => const CategoryScreen(),
   };
 }

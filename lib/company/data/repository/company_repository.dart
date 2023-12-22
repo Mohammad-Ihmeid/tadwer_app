@@ -7,6 +7,7 @@ import 'package:tadwer_app/company/domain/entities/company_type.dart';
 import 'package:tadwer_app/company/domain/entities/waste.dart';
 import 'package:tadwer_app/company/domain/repository/base_company_repository.dart';
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/add_basket_usecase.dart';
 import 'package:tadwer_app/core/error/exceptions.dart';
@@ -73,6 +74,20 @@ class CompanyRepository extends BaseCompanyRepository {
     try {
       final result =
           await baseCompanyRemoteDataSource.connectUserWithCompany(parameters);
+      return Right(result);
+    } on RemoteExceptions catch (failure) {
+      return Left(RemoteFailure(failure.errorMessageModel.errorMessage));
+    } catch (e) {
+      return const Left(RemoteFailure("حدث خطأ برمجي الرجاء المحاولة لاحقا"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CompanyType>> getCompanyTypeById(
+      GetCompanyTypeByIdParameters parameters) async {
+    try {
+      final result =
+          await baseCompanyRemoteDataSource.getCompanyTypeById(parameters);
       return Right(result);
     } on RemoteExceptions catch (failure) {
       return Left(RemoteFailure(failure.errorMessageModel.errorMessage));
