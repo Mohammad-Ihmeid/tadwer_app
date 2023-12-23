@@ -39,9 +39,7 @@ class WasteScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: 3.h),
-                CustomAppBar.appBar(),
-                SizedBox(height: 3.h),
+                CustomAppBar.appBar(context),
                 CustomHeader.customHeader(
                   child: Text(
                     categoryName,

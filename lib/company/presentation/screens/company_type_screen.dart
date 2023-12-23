@@ -33,9 +33,7 @@ class CompanyTypeScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 3.h),
-                  CustomAppBar.appBar(),
-                  SizedBox(height: 3.h),
+                  CustomAppBar.appBar(context),
                   Text(
                     " ما نوع منشئتك ؟",
                     textAlign: TextAlign.right,

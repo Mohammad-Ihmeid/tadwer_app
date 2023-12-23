@@ -33,9 +33,7 @@ class CategoryScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 3.h),
-                CustomAppBar.appBar(),
-                SizedBox(height: 3.h),
+                CustomAppBar.appBar(context),
                 BlocBuilder<CompanyTypeBloc, CompanyTypeState>(
                   builder: (context, state) {
                     return CustomHeader.customHeader(
