@@ -31,3 +31,12 @@ class AddWasteToBasketEvent extends WasteEvent {
   @override
   List<Object?> get props => [wasteID];
 }
+
+class UpdateQuantityOrAdd extends WasteEvent {
+  final int wasteID;
+
+  const UpdateQuantityOrAdd({required this.wasteID});
+
+  @override
+  List<Object?> get props => [wasteID];
+}
