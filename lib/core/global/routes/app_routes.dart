@@ -5,9 +5,8 @@ abstract class Routes {
   static const logIn = Paths.logIn;
   static const companyType = Paths.companyType;
   static const categoryType = Paths.categoryType;
-
   static const wasteType = Paths.wasteType;
-  static const orderConfirmation = Paths.orderConfirmation;
+  static const basket = Paths.basket;
 }
 
 abstract class Paths {
@@ -17,8 +16,6 @@ abstract class Paths {
   //Users
   static const companyType = '/companyType';
   static const categoryType = '/categoryType';
-
-  static const facilityType = '/facilityType';
   static const wasteType = '/wasteType';
-  static const orderConfirmation = '/orderConfirmation';
+  static const basket = '/basket';
 }
