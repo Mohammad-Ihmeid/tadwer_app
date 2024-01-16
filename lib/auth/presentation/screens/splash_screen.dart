@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:tadwer_app/auth/presentation/controller/login_bloc/login_bloc.dart';
+import 'package:tadwer_app/auth/presentation/controller/login_bloc.dart';
 import 'package:tadwer_app/core/services/services_locator.dart';
 import 'package:tadwer_app/core/utils/enums.dart';
 

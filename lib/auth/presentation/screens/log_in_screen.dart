@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/auth/presentation/components/custom_text_field.dart';
-import 'package:tadwer_app/auth/presentation/controller/login_bloc/login_bloc.dart';
+import 'package:tadwer_app/auth/presentation/controller/login_bloc.dart';
 import 'package:tadwer_app/core/services/services_locator.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
@@ -122,34 +122,6 @@ class LogInScreen extends StatelessWidget {
               }
               return null;
             },
-          ),
-          SizedBox(height: 3.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  Checkbox(
-                    value: false,
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    visualDensity: const VisualDensity(horizontal: -4),
-                    onChanged: (check) => false,
-                    side: const BorderSide(color: ColorManager.white),
-                    activeColor: ColorManager.darkBink,
-                  ),
-                  SizedBox(width: 2.w),
-                  Text(
-                    "Remember me",
-                    style: Theme.of(context).textTheme.displaySmall,
-                  )
-                ],
-              ),
-              Text(
-                "Forgot Password?",
-                style: Theme.of(context).textTheme.displaySmall,
-              )
-            ],
           ),
           SizedBox(height: 3.h),
           GestureDetector(
