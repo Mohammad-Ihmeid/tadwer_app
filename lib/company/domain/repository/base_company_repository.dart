@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:tadwer_app/company/domain/entities/category.dart';
 import 'package:tadwer_app/company/domain/entities/waste.dart';
+import 'package:tadwer_app/company/domain/usecases/add_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
@@ -27,4 +28,9 @@ abstract class BaseCompanyRepository {
 
   Future<Either<Failure, String>> updateQuantityOrAdd(
       UpdateQuantityOrAddParameters parameters);
+
+  ///////////////////////////////////////////////////
+
+  Future<Either<Failure, String>> addUserAddress(
+      AddUserAddressParameters parameters);
 }

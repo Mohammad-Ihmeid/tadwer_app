@@ -7,6 +7,7 @@ abstract class Routes {
   static const categoryType = Paths.categoryType;
   static const wasteType = Paths.wasteType;
   static const basket = Paths.basket;
+  static const recyclingRequest = Paths.recyclingRequest;
 }
 
 abstract class Paths {
@@ -18,4 +19,5 @@ abstract class Paths {
   static const categoryType = '/categoryType';
   static const wasteType = '/wasteType';
   static const basket = '/basket';
+  static const recyclingRequest = '/recyclingRequest';
 }

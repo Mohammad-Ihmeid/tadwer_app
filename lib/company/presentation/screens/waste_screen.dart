@@ -5,6 +5,7 @@ import 'package:tadwer_app/company/presentation/components/waste_type_component.
 import 'package:tadwer_app/company/presentation/components/widget/custom_app_bar.dart';
 import 'package:tadwer_app/company/presentation/components/widget/custom_header.dart';
 import 'package:tadwer_app/company/presentation/controller/waste_bloc/waste_bloc.dart';
+import 'package:tadwer_app/core/global/routes/app_routes.dart';
 import 'package:tadwer_app/core/services/services_locator.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 
@@ -53,32 +54,40 @@ class WasteScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Column(
-                        children: [
-                          Image.asset(
-                            IconsAssets.logoApp,
-                            color: Colors.white,
-                            width: 20.w,
-                            height: 10.h,
-                          ),
-                          Text(
-                            "طلب تدوير",
-                            style: Theme.of(context).textTheme.titleMedium,
-                          )
-                        ],
+                      GestureDetector(
+                        onTap: () => Navigator.pushNamed(
+                            context, Routes.recyclingRequest),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              IconsAssets.logoApp,
+                              color: Colors.white,
+                              width: 20.w,
+                              height: 10.h,
+                            ),
+                            Text(
+                              "طلب تدوير",
+                              style: Theme.of(context).textTheme.titleMedium,
+                            )
+                          ],
+                        ),
                       ),
-                      Column(
-                        children: [
-                          Image.asset(
-                            ImagesAssets.basketImage,
-                            width: 20.w,
-                            height: 10.h,
-                          ),
-                          Text(
-                            "السلة",
-                            style: Theme.of(context).textTheme.titleMedium,
-                          )
-                        ],
+                      GestureDetector(
+                        onTap: () =>
+                            Navigator.pushNamed(context, Routes.basket),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              ImagesAssets.basketImage,
+                              width: 20.w,
+                              height: 10.h,
+                            ),
+                            Text(
+                              "السلة",
+                              style: Theme.of(context).textTheme.titleMedium,
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),

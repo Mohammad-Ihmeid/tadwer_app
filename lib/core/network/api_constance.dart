@@ -18,7 +18,11 @@ class ApiConstance {
   static String getWasteByCategoryPath(int catId) =>
       "${baseURL}Waste/GetWasteByCategory/$catId";
 
+  //Basket
   static String addBasketPath = "${baseURL}Basket/AddBasket";
   static String updateQuantityOrAddPath =
       "${baseURL}Quantity/UpdateQuantityOrAdd";
+
+  //Address
+  static String addAddressPath = "${baseURL}Address/AddAddress";
 }

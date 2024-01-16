@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:tadwer_app/company/data/models/category_model.dart';
 import 'package:tadwer_app/company/data/models/waste_model.dart';
+import 'package:tadwer_app/company/domain/usecases/add_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
@@ -31,6 +32,10 @@ abstract class BaseCompanyRemoteDataSource {
 
   Future<String> connectUserWithCompany(
       ConnectUserWithCompanyParameters parameters);
+
+  ////////////////////////////////////////////////////////////
+
+  Future<String> addUserAddress(AddUserAddressParameters parameters);
 }
 
 class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
@@ -172,6 +177,28 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
     final response = await http.post(
       Uri.parse(ApiConstance.updateQuantityOrAddPath),
       body: json.encode(parameters.quantity.toModel().toJson()),
+      headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var responseJson = json.decode(response.body);
+      return responseJson;
+    } else {
+      var responseJson = json.decode(response.body);
+      throw RemoteExceptions(
+        errorMessageModel: ErrorMessageModel.fromJson(responseJson),
+      );
+    }
+  }
+
+  @override
+  Future<String> addUserAddress(AddUserAddressParameters parameters) async {
+    final response = await http.post(
+      Uri.parse(ApiConstance.addAddressPath),
+      body: json.encode(parameters.address.toModel().toJson()),
       headers: {
         "content-type": "application/json",
         "accept": "application/json",

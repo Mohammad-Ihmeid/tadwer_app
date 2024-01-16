@@ -7,6 +7,7 @@ import 'package:tadwer_app/auth/presentation/controller/login_bloc/login_bloc.da
 import 'package:tadwer_app/company/data/datasource/company_remote_data_source.dart';
 import 'package:tadwer_app/company/data/repository/company_repository.dart';
 import 'package:tadwer_app/company/domain/repository/base_company_repository.dart';
+import 'package:tadwer_app/company/domain/usecases/add_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/add_basket_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_all_category_usecase.dart';
@@ -40,6 +41,7 @@ class ServicesLocator {
     getIt.registerLazySingleton(() => AddBasketUseCase(getIt()));
     getIt.registerLazySingleton(() => ConnectUserWithCompanyUseCase(getIt()));
     getIt.registerLazySingleton(() => GetCompanyTypeByIdUseCase(getIt()));
+    getIt.registerLazySingleton(() => AddUserAddressUseCase(getIt()));
 
     //Repository
     getIt.registerLazySingleton<BaseLogInRepository>(
