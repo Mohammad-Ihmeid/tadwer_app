@@ -2,7 +2,12 @@ part of 'recycling_request_bloc.dart';
 
 sealed class RecyclingRequestEvent extends Equatable {}
 
-class AddAdressEvent extends RecyclingRequestEvent {
+class CheckAddressEvent extends RecyclingRequestEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class UpdateAddressEvent extends RecyclingRequestEvent {
   final String city;
   final String area;
   final String street;
@@ -10,7 +15,7 @@ class AddAdressEvent extends RecyclingRequestEvent {
   final String buildNum;
   final String additional;
 
-  AddAdressEvent({
+  UpdateAddressEvent({
     required this.city,
     required this.area,
     required this.street,

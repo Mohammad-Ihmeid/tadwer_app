@@ -1,7 +1,8 @@
-import 'package:tadwer_app/company/domain/entities/address_entities/add_address.dart';
+import 'package:tadwer_app/company/domain/entities/address_entities/update_address.dart';
 
-class AddAddressModel extends AddAddress {
-  const AddAddressModel({
+class UpdateAddressModel extends UpdateAddress {
+  const UpdateAddressModel({
+    required super.addressId,
     required super.userRef,
     required super.city,
     required super.area,
@@ -13,7 +14,8 @@ class AddAddressModel extends AddAddress {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> json = <String, dynamic>{};
-    json['UserRef'] = userRef;
+    json['addressId'] = addressId;
+    json['userRef'] = userRef;
     json['City'] = city;
     json['Area'] = area;
     json['Street'] = street;

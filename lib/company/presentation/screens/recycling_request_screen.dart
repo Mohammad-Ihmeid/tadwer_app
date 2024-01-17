@@ -1,73 +1,93 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/company/presentation/components/address_component/add_address_component.dart';
 import 'package:tadwer_app/company/presentation/components/widget/custom_app_bar.dart';
+import 'package:tadwer_app/company/presentation/controller/bloc_recycling_request/recycling_request_bloc.dart';
+import 'package:tadwer_app/core/services/services_locator.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
 import 'package:tadwer_app/core/utils/values_manager.dart';
 
 class RecyclingRequestScreen extends StatelessWidget {
-  const RecyclingRequestScreen({super.key});
+  final TextEditingController city = TextEditingController();
+  final TextEditingController area = TextEditingController();
+  final TextEditingController street = TextEditingController();
+  final TextEditingController phone = TextEditingController();
+  final TextEditingController buildNum = TextEditingController();
+  final TextEditingController additional = TextEditingController();
+  RecyclingRequestScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            SizedBox(
-              width: 100.w,
-              height: 100.h,
-              child: Image.asset(
-                ImagesAssets.backgroundImage,
-                fit: BoxFit.cover,
+    return BlocProvider(
+      create: (context) => getIt<RecyclingRequestBloc>(),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: SafeArea(
+          child: Stack(
+            children: [
+              SizedBox(
+                width: 100.w,
+                height: 100.h,
+                child: Image.asset(
+                  ImagesAssets.backgroundImage,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CustomAppBar.appBar(context),
-                GestureDetector(
-                  onTap: () => showAddAddressDialog(context),
-                  child: Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.all(AppPadding.p16),
-                    padding:
-                        const EdgeInsets.symmetric(vertical: AppPadding.p16),
-                    decoration: BoxDecoration(
-                      color: ColorManager.white,
-                      borderRadius: BorderRadius.circular(AppBorderRadius.s15),
-                    ),
-                    child: Text(
-                      "أضافة الموقع",
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.titleLarge,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CustomAppBar.appBar(context),
+                  BlocBuilder<RecyclingRequestBloc, RecyclingRequestState>(
+                    builder: (context, state) {
+                      return GestureDetector(
+                        onTap: () {
+                          showAddAddressDialog(context);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.all(AppPadding.p16),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: AppPadding.p16),
+                          decoration: BoxDecoration(
+                            color: ColorManager.white,
+                            borderRadius:
+                                BorderRadius.circular(AppBorderRadius.s15),
+                          ),
+                          child: Text(
+                            "أضافة الموقع",
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.all(AppPadding.p16),
+                      padding:
+                          const EdgeInsets.symmetric(vertical: AppPadding.p16),
+                      decoration: BoxDecoration(
+                        color: ColorManager.white,
+                        borderRadius:
+                            BorderRadius.circular(AppBorderRadius.s15),
+                      ),
+                      child: Text(
+                        "طلب تدوير",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.all(AppPadding.p16),
-                    padding:
-                        const EdgeInsets.symmetric(vertical: AppPadding.p16),
-                    decoration: BoxDecoration(
-                      color: ColorManager.white,
-                      borderRadius: BorderRadius.circular(AppBorderRadius.s15),
-                    ),
-                    child: Text(
-                      "طلب تدوير",
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

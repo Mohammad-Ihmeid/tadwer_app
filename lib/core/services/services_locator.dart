@@ -7,13 +7,17 @@ import 'package:tadwer_app/auth/presentation/controller/login_bloc.dart';
 import 'package:tadwer_app/company/data/datasource/company_remote_data_source.dart';
 import 'package:tadwer_app/company/data/repository/company_repository.dart';
 import 'package:tadwer_app/company/domain/repository/base_company_repository.dart';
-import 'package:tadwer_app/company/domain/usecases/add_address_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/address_usecase/add_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/add_basket_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/address_usecase/check_address_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/address_usecase/update_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_all_category_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_all_company_type_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
+import 'package:tadwer_app/company/presentation/controller/bloc_basket/basket_bloc.dart';
+import 'package:tadwer_app/company/presentation/controller/bloc_recycling_request/recycling_request_bloc.dart';
 import 'package:tadwer_app/company/presentation/controller/company_type_bloc/company_type_bloc.dart';
 import 'package:tadwer_app/company/presentation/controller/waste_bloc/waste_bloc.dart';
 
@@ -32,6 +36,9 @@ class ServicesLocator {
       ),
     );
     getIt.registerFactory(() => WasteBloc(getIt(), getIt()));
+    getIt.registerFactory(() => BasketBloc());
+    getIt
+        .registerFactory(() => RecyclingRequestBloc(getIt(), getIt(), getIt()));
 
     //Use Case
     getIt.registerLazySingleton(() => CheckLogInUseCase(getIt()));
@@ -41,7 +48,10 @@ class ServicesLocator {
     getIt.registerLazySingleton(() => AddBasketUseCase(getIt()));
     getIt.registerLazySingleton(() => ConnectUserWithCompanyUseCase(getIt()));
     getIt.registerLazySingleton(() => GetCompanyTypeByIdUseCase(getIt()));
+    ////////////////////////////////////////////////////////////////
     getIt.registerLazySingleton(() => AddUserAddressUseCase(getIt()));
+    getIt.registerLazySingleton(() => CheckUserAddressUseCase(getIt()));
+    getIt.registerLazySingleton(() => UpdateAddressUseCase(getIt()));
 
     //Repository
     getIt.registerLazySingleton<BaseLogInRepository>(

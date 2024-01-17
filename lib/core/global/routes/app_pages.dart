@@ -18,6 +18,6 @@ class AppPages {
     Routes.companyType: (context) => const CompanyTypeScreen(),
     Routes.categoryType: (context) => const CategoryScreen(),
     Routes.basket: (context) => const BasketScreen(),
-    Routes.recyclingRequest: (context) => const RecyclingRequestScreen(),
+    Routes.recyclingRequest: (context) => RecyclingRequestScreen(),
   };
 }

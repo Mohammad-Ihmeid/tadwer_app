@@ -25,4 +25,7 @@ class ApiConstance {
 
   //Address
   static String addAddressPath = "${baseURL}Address/AddAddress";
+  static String checkUserAddressPath(int uID) =>
+      "${baseURL}Address/GetAddressByUid/$uID";
+  static String updateAddressPath = "${baseURL}Address/UpdateAddress";
 }

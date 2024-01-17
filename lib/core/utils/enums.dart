@@ -17,3 +17,10 @@ enum BottomState {
   error,
   success,
 }
+
+enum SaveState {
+  normal,
+  loading,
+  error,
+  success,
+}
