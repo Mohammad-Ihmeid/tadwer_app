@@ -1,4 +1,4 @@
-import 'package:tadwer_app/company/domain/entities/quantity.dart';
+import 'package:tadwer_app/company/domain/entities/waste_entities/quantity.dart';
 
 class QuantityModel extends Quantity {
   const QuantityModel({

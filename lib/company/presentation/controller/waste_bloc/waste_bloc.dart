@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tadwer_app/company/domain/entities/add_basket.dart';
-import 'package:tadwer_app/company/domain/entities/waste.dart';
-import 'package:tadwer_app/company/domain/usecases/add_basket_usecase.dart';
+import 'package:tadwer_app/company/domain/entities/waste_entities/add_basket.dart';
+import 'package:tadwer_app/company/domain/entities/waste_entities/waste.dart';
+import 'package:tadwer_app/company/domain/usecases/basket_usecase/add_basket_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
 import 'package:tadwer_app/core/utils/enums.dart';
 
@@ -24,6 +24,7 @@ class WasteBloc extends Bloc<WasteEvent, WasteState> {
       emit(state.copyWith(
         wasteID: event.wasteID,
         showWasteDet: event.showWasteDet,
+        addBasketState: BottomState.prePress,
       ));
     });
   }
@@ -34,24 +35,30 @@ class WasteBloc extends Bloc<WasteEvent, WasteState> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     int uId = prefs.getInt("Uid") ?? 0;
 
-    final result = await addBasketUseCase(
-      AddBasketParameters(
-        addBasket: AddBasket(
-          basId: 1,
-          userRef: uId,
-          wastRef: event.wasteID,
-        ),
-      ),
-    );
+    int? count = int.tryParse(event.count);
 
-    result.fold((l) {
+    if (count != null) {
+      final result = await addBasketUseCase(
+        AddBasketParameters(
+          addBasket:
+              AddBasket(userRef: uId, wastRef: event.wasteID, count: count),
+        ),
+      );
+
+      result.fold((l) {
+        emit(state.copyWith(
+          addBasketState: BottomState.error,
+          errorAddBasket: l.message,
+        ));
+      }, (r) {
+        emit(state.copyWith(addBasketState: BottomState.success));
+      });
+    } else {
       emit(state.copyWith(
         addBasketState: BottomState.error,
-        errorAddBasket: l.message,
+        errorAddBasket: "الرجاء أدخال الكمية بشكل صحيح",
       ));
-    }, (r) {
-      emit(state.copyWith(addBasketState: BottomState.success));
-    });
+    }
   }
 
   FutureOr<void> _getWasteByCategoryEvent(event, emit) async {

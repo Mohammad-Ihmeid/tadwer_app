@@ -1,4 +1,4 @@
-import 'package:tadwer_app/company/domain/entities/waste.dart';
+import 'package:tadwer_app/company/domain/entities/waste_entities/waste.dart';
 
 class WasteModel extends Waste {
   const WasteModel({required super.id, required super.wasteName});

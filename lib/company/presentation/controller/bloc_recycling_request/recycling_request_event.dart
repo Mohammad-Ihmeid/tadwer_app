@@ -34,3 +34,8 @@ class UpdateAddressEvent extends RecyclingRequestEvent {
         additional,
       ];
 }
+
+class GetDataBasketEvent extends RecyclingRequestEvent {
+  @override
+  List<Object> get props => [];
+}

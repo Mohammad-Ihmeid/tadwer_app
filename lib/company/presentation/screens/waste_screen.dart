@@ -48,7 +48,7 @@ class WasteScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 5.h),
-                const Expanded(child: WasteTypeComponent()),
+                Expanded(child: WasteTypeComponent()),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: Row(

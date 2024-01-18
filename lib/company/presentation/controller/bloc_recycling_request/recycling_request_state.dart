@@ -13,6 +13,7 @@ class RecyclingRequestState extends Equatable {
   final String buildNum;
   final String additional;
   //////////////////////////////////////
+  final List<DataBasket> dataBasket;
 
   const RecyclingRequestState({
     this.checkAddress = false,
@@ -26,21 +27,22 @@ class RecyclingRequestState extends Equatable {
     this.phone = '',
     this.buildNum = '',
     this.additional = '',
+    this.dataBasket = const [],
   });
 
-  RecyclingRequestState copyWith({
-    bool? checkAddress,
-    RequestState? requestAddressState,
-    SaveState? saveAddressState,
-    String? saveAddressError,
-    int? addressId,
-    String? city,
-    String? area,
-    String? street,
-    String? phone,
-    String? buildNum,
-    String? additional,
-  }) {
+  RecyclingRequestState copyWith(
+      {bool? checkAddress,
+      RequestState? requestAddressState,
+      SaveState? saveAddressState,
+      String? saveAddressError,
+      int? addressId,
+      String? city,
+      String? area,
+      String? street,
+      String? phone,
+      String? buildNum,
+      String? additional,
+      List<DataBasket>? dataBasket}) {
     return RecyclingRequestState(
       checkAddress: checkAddress ?? this.checkAddress,
       requestAddressState: requestAddressState ?? this.requestAddressState,
@@ -53,6 +55,7 @@ class RecyclingRequestState extends Equatable {
       phone: phone ?? this.phone,
       buildNum: buildNum ?? this.buildNum,
       additional: additional ?? this.additional,
+      dataBasket: dataBasket ?? this.dataBasket,
     );
   }
 
@@ -70,6 +73,7 @@ class RecyclingRequestState extends Equatable {
       phone,
       buildNum,
       additional,
+      dataBasket,
     ];
   }
 }

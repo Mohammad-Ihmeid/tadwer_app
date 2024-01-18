@@ -8,9 +8,10 @@ import 'package:tadwer_app/company/data/datasource/company_remote_data_source.da
 import 'package:tadwer_app/company/data/repository/company_repository.dart';
 import 'package:tadwer_app/company/domain/repository/base_company_repository.dart';
 import 'package:tadwer_app/company/domain/usecases/address_usecase/add_address_usecase.dart';
-import 'package:tadwer_app/company/domain/usecases/add_basket_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/basket_usecase/add_basket_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/address_usecase/check_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/address_usecase/update_address_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/basket_usecase/get_data_basket.dart';
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_all_category_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_all_company_type_usecase.dart';
@@ -36,9 +37,13 @@ class ServicesLocator {
       ),
     );
     getIt.registerFactory(() => WasteBloc(getIt(), getIt()));
-    getIt.registerFactory(() => BasketBloc());
-    getIt
-        .registerFactory(() => RecyclingRequestBloc(getIt(), getIt(), getIt()));
+    getIt.registerFactory(() => BasketBloc(getIt()));
+    getIt.registerFactory(() => RecyclingRequestBloc(
+          getIt(),
+          getIt(),
+          getIt(),
+          getIt(),
+        ));
 
     //Use Case
     getIt.registerLazySingleton(() => CheckLogInUseCase(getIt()));
@@ -48,6 +53,8 @@ class ServicesLocator {
     getIt.registerLazySingleton(() => AddBasketUseCase(getIt()));
     getIt.registerLazySingleton(() => ConnectUserWithCompanyUseCase(getIt()));
     getIt.registerLazySingleton(() => GetCompanyTypeByIdUseCase(getIt()));
+    ////////////////////////////////////////////////////////////////
+    getIt.registerLazySingleton(() => GetDataBasketUseCase(getIt()));
     ////////////////////////////////////////////////////////////////
     getIt.registerLazySingleton(() => AddUserAddressUseCase(getIt()));
     getIt.registerLazySingleton(() => CheckUserAddressUseCase(getIt()));

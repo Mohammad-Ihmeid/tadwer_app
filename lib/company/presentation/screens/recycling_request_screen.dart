@@ -21,7 +21,8 @@ class RecyclingRequestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<RecyclingRequestBloc>(),
+      create: (context) =>
+          getIt<RecyclingRequestBloc>()..add(GetDataBasketEvent()),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SafeArea(
@@ -40,6 +41,7 @@ class RecyclingRequestScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   CustomAppBar.appBar(context),
+                  listDataBasket(),
                   BlocBuilder<RecyclingRequestBloc, RecyclingRequestState>(
                     builder: (context, state) {
                       return GestureDetector(
@@ -90,6 +92,42 @@ class RecyclingRequestScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget listDataBasket() {
+    return BlocBuilder<RecyclingRequestBloc, RecyclingRequestState>(
+      buildWhen: (previous, current) =>
+          previous.dataBasket.length != current.dataBasket.length,
+      builder: (context, state) {
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: state.dataBasket.length,
+          itemBuilder: (context, index) {
+            final element = state.dataBasket[index];
+            return Directionality(
+              textDirection: TextDirection.rtl,
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                    horizontal: AppPadding.p16, vertical: 2),
+                child: Row(
+                  children: [
+                    Text(
+                      element.wasteName,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      element.count.toString(),
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

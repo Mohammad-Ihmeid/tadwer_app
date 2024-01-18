@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:tadwer_app/company/domain/entities/waste.dart';
+import 'package:tadwer_app/company/domain/entities/waste_entities/waste.dart';
 import 'package:tadwer_app/company/domain/repository/base_company_repository.dart';
 import 'package:tadwer_app/core/error/failure.dart';
 import 'package:tadwer_app/core/usecase/base_usecase.dart';

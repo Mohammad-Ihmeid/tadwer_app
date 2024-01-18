@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tadwer_app/company/data/models/address_model.dart';
+import 'package:tadwer_app/company/data/models/basket_model/data_basket_model.dart';
 import 'package:tadwer_app/company/data/models/category_model.dart';
 import 'package:tadwer_app/company/data/models/waste_model.dart';
 import 'package:tadwer_app/company/domain/usecases/address_usecase/add_address_usecase.dart';
@@ -11,8 +12,8 @@ import 'package:tadwer_app/company/domain/usecases/address_usecase/update_addres
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
-import 'package:tadwer_app/company/domain/usecases/add_basket_usecase.dart';
-import 'package:tadwer_app/company/domain/usecases/update_quantity_or_add_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/basket_usecase/add_basket_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/basket_usecase/update_quantity_or_add_usecase.dart';
 import 'package:tadwer_app/core/error/exceptions.dart';
 import 'package:tadwer_app/core/network/api_constance.dart';
 import 'package:tadwer_app/core/network/error_message_model.dart';
@@ -30,12 +31,16 @@ abstract class BaseCompanyRemoteDataSource {
   Future<List<WasteModel>> getWasteByCategory(
       GetWasteByCategoryParameters parameters);
 
-  Future<String> addBasket(AddBasketParameters parameters);
-
-  Future<String> updateQuantityOrAdd(UpdateQuantityOrAddParameters parameters);
-
   Future<String> connectUserWithCompany(
       ConnectUserWithCompanyParameters parameters);
+
+  ////////////////////////////////////////////////////////////
+
+  Future<List<DataBasketModel>> getDataBasket(NoParameters parameters);
+
+  Future<bool> addBasket(AddBasketParameters parameters);
+
+  Future<String> updateQuantityOrAdd(UpdateQuantityOrAddParameters parameters);
 
   ////////////////////////////////////////////////////////////
 
@@ -130,7 +135,7 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
   }
 
   @override
-  Future<String> addBasket(AddBasketParameters parameters) async {
+  Future<bool> addBasket(AddBasketParameters parameters) async {
     debugPrint(ApiConstance.addBasketPath);
     debugPrint(json.encode(parameters.addBasket.toModel().toJson()));
     final response = await http.post(
@@ -146,7 +151,7 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
 
     if (response.statusCode == 200) {
       var responseJson = json.decode(response.body);
-      return responseJson;
+      return responseJson["success"];
     } else {
       var responseJson = json.decode(response.body);
       debugPrint(responseJson);
@@ -271,6 +276,28 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
     if (response.statusCode == 200) {
       var responseJson = json.decode(response.body);
       return responseJson;
+    } else {
+      var responseJson = json.decode(response.body);
+      throw RemoteExceptions(
+        errorMessageModel: ErrorMessageModel.fromJson(responseJson),
+      );
+    }
+  }
+
+  @override
+  Future<List<DataBasketModel>> getDataBasket(NoParameters parameters) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final response = await http.get(
+      Uri.parse(ApiConstance.getDataBasketPath(prefs.getInt("Uid") ?? 0)),
+    );
+
+    if (response.statusCode == 200) {
+      var responseJson = json.decode(response.body);
+      return List<DataBasketModel>.from(
+        (responseJson as List).map(
+          (e) => DataBasketModel.fromJson(e),
+        ),
+      );
     } else {
       var responseJson = json.decode(response.body);
       throw RemoteExceptions(
