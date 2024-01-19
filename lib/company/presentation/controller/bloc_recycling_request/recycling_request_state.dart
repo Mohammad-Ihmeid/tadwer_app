@@ -2,59 +2,43 @@ part of 'recycling_request_bloc.dart';
 
 class RecyclingRequestState extends Equatable {
   final RequestState requestAddressState;
-  final SaveState saveAddressState;
   final String saveAddressError;
   final bool checkAddress;
-  final int addressId;
-  final String city;
-  final String area;
-  final String street;
-  final String phone;
-  final String buildNum;
-  final String additional;
+  //////////////////////////////////////
+  final SaveState recyclingSaveState;
+  final String recyclingError;
   //////////////////////////////////////
   final List<DataBasket> dataBasket;
 
   const RecyclingRequestState({
     this.checkAddress = false,
     this.requestAddressState = RequestState.loading,
-    this.saveAddressState = SaveState.normal,
     this.saveAddressError = '',
-    this.addressId = 0,
-    this.city = '',
-    this.area = '',
-    this.street = '',
-    this.phone = '',
-    this.buildNum = '',
-    this.additional = '',
+    //////////////////////////////////////
+    this.recyclingSaveState = SaveState.normal,
+    this.recyclingError = '',
+    //////////////////////////////////////
     this.dataBasket = const [],
   });
 
-  RecyclingRequestState copyWith(
-      {bool? checkAddress,
-      RequestState? requestAddressState,
-      SaveState? saveAddressState,
-      String? saveAddressError,
-      int? addressId,
-      String? city,
-      String? area,
-      String? street,
-      String? phone,
-      String? buildNum,
-      String? additional,
-      List<DataBasket>? dataBasket}) {
+  RecyclingRequestState copyWith({
+    bool? checkAddress,
+    RequestState? requestAddressState,
+    String? saveAddressError,
+    //////////////////////////////////////
+    SaveState? recyclingSaveState,
+    String? recyclingError,
+    //////////////////////////////////////
+    List<DataBasket>? dataBasket,
+  }) {
     return RecyclingRequestState(
       checkAddress: checkAddress ?? this.checkAddress,
       requestAddressState: requestAddressState ?? this.requestAddressState,
-      saveAddressState: saveAddressState ?? this.saveAddressState,
       saveAddressError: saveAddressError ?? this.saveAddressError,
-      addressId: addressId ?? this.addressId,
-      city: city ?? this.city,
-      area: area ?? this.area,
-      street: street ?? this.street,
-      phone: phone ?? this.phone,
-      buildNum: buildNum ?? this.buildNum,
-      additional: additional ?? this.additional,
+      //////////////////////////////////////
+      recyclingSaveState: recyclingSaveState ?? this.recyclingSaveState,
+      recyclingError: recyclingError ?? this.recyclingError,
+      //////////////////////////////////////
       dataBasket: dataBasket ?? this.dataBasket,
     );
   }
@@ -64,15 +48,11 @@ class RecyclingRequestState extends Equatable {
     return [
       checkAddress,
       requestAddressState,
-      saveAddressState,
       saveAddressError,
-      addressId,
-      city,
-      area,
-      street,
-      phone,
-      buildNum,
-      additional,
+      //////////////////////////////////////
+      recyclingSaveState,
+      recyclingError,
+      //////////////////////////////////////
       dataBasket,
     ];
   }

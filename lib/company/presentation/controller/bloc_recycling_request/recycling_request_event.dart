@@ -7,35 +7,12 @@ class CheckAddressEvent extends RecyclingRequestEvent {
   List<Object> get props => [];
 }
 
-class UpdateAddressEvent extends RecyclingRequestEvent {
-  final String city;
-  final String area;
-  final String street;
-  final String phone;
-  final String buildNum;
-  final String additional;
-
-  UpdateAddressEvent({
-    required this.city,
-    required this.area,
-    required this.street,
-    required this.phone,
-    required this.buildNum,
-    required this.additional,
-  });
-
+class GetDataBasketEvent extends RecyclingRequestEvent {
   @override
-  List<Object> get props => [
-        city,
-        area,
-        street,
-        phone,
-        buildNum,
-        additional,
-      ];
+  List<Object> get props => [];
 }
 
-class GetDataBasketEvent extends RecyclingRequestEvent {
+class RecyclingSaveEvent extends RecyclingRequestEvent {
   @override
   List<Object> get props => [];
 }

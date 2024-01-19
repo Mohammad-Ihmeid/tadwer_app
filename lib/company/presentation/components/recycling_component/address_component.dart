@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/company/presentation/components/widget/custom_address_text_field.dart';
-import 'package:tadwer_app/company/presentation/controller/bloc_recycling_request/recycling_request_bloc.dart';
+import 'package:tadwer_app/company/presentation/controller/bloc_address/address_bloc.dart';
 import 'package:tadwer_app/core/constanses.dart';
 import 'package:tadwer_app/core/global/widget/custom_save_dialog.dart';
 import 'package:tadwer_app/core/global/widget/show_loading_dialog.dart';
+import 'package:tadwer_app/core/services/services_locator.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
 import 'package:tadwer_app/core/utils/enums.dart';
 import 'package:tadwer_app/core/utils/values_manager.dart';
 
-Future<dynamic> showAddAddressDialog(BuildContext context) {
+Future<dynamic> showAddressDialog(BuildContext context) {
   TextEditingController city = TextEditingController();
   TextEditingController area = TextEditingController();
   TextEditingController street = TextEditingController();
@@ -20,9 +21,9 @@ Future<dynamic> showAddAddressDialog(BuildContext context) {
   const riKey1 = Key('__RIKEY1__');
   return showAdaptiveDialog(
     context: context,
-    builder: (ctx) => BlocProvider.value(
-      value: context.read<RecyclingRequestBloc>()..add(CheckAddressEvent()),
-      child: BlocConsumer<RecyclingRequestBloc, RecyclingRequestState>(
+    builder: (ctx) => BlocProvider(
+      create: (context) => getIt<AddressBloc>()..add(CheckAddressEvent()),
+      child: BlocConsumer<AddressBloc, AddressState>(
         listenWhen: (previous, current) =>
             previous.saveAddressState != current.saveAddressState,
         listener: (context, state) {
@@ -122,12 +123,11 @@ Future<dynamic> showAddAddressDialog(BuildContext context) {
                               hintText: "معلومات أضافية",
                             ),
                             SizedBox(height: 1.h),
-                            BlocBuilder<RecyclingRequestBloc,
-                                RecyclingRequestState>(
+                            BlocBuilder<AddressBloc, AddressState>(
                               builder: (context, state) {
                                 return ElevatedButton(
                                   onPressed: () {
-                                    context.read<RecyclingRequestBloc>().add(
+                                    context.read<AddressBloc>().add(
                                           UpdateAddressEvent(
                                             city: city.text,
                                             area: area.text,

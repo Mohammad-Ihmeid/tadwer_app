@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:tadwer_app/company/presentation/components/address_component/add_address_component.dart';
+import 'package:tadwer_app/company/presentation/components/recycling_component/address_component.dart';
 import 'package:tadwer_app/company/presentation/components/widget/custom_app_bar.dart';
 import 'package:tadwer_app/company/presentation/controller/bloc_recycling_request/recycling_request_bloc.dart';
+import 'package:tadwer_app/core/constanses.dart';
+import 'package:tadwer_app/core/global/unique_key.dart';
+import 'package:tadwer_app/core/global/widget/custom_save_dialog.dart';
+import 'package:tadwer_app/core/global/widget/show_loading_dialog.dart';
 import 'package:tadwer_app/core/services/services_locator.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
+import 'package:tadwer_app/core/utils/enums.dart';
 import 'package:tadwer_app/core/utils/values_manager.dart';
 
 class RecyclingRequestScreen extends StatelessWidget {
@@ -21,32 +26,50 @@ class RecyclingRequestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          getIt<RecyclingRequestBloc>()..add(GetDataBasketEvent()),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SafeArea(
-          child: Stack(
-            children: [
-              SizedBox(
-                width: 100.w,
-                height: 100.h,
-                child: Image.asset(
-                  ImagesAssets.backgroundImage,
-                  fit: BoxFit.cover,
+      create: (context) => getIt<RecyclingRequestBloc>()
+        ..add(GetDataBasketEvent())
+        ..add(CheckAddressEvent()),
+      child: BlocListener<RecyclingRequestBloc, RecyclingRequestState>(
+        listenWhen: (previous, current) =>
+            previous.recyclingSaveState != current.recyclingSaveState,
+        listener: (context, state) {
+          if (state.recyclingSaveState == SaveState.loading) {
+            LoadingDialog.show(context, key: UnKey.unKey3);
+          } else if (state.recyclingSaveState == SaveState.error) {
+            LoadingDialog.hide(context);
+            AppConstanse.messageWarning(state.recyclingError, context);
+          } else if (state.recyclingSaveState == SaveState.success) {
+            LoadingDialog.hide(context);
+            showCustomSaveDialog(context, "تم طلب التدوير بنجاح");
+          }
+        },
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: SafeArea(
+            child: Stack(
+              children: [
+                SizedBox(
+                  width: 100.w,
+                  height: 100.h,
+                  child: Image.asset(
+                    ImagesAssets.backgroundImage,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomAppBar.appBar(context),
-                  listDataBasket(),
-                  BlocBuilder<RecyclingRequestBloc, RecyclingRequestState>(
-                    builder: (context, state) {
-                      return GestureDetector(
+                SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CustomAppBar.appBar(context),
+                      listDataBasket(),
+                      GestureDetector(
                         onTap: () {
-                          showAddAddressDialog(context);
+                          showAddressDialog(context).then((value) {
+                            context
+                                .read<RecyclingRequestBloc>()
+                                .add(RecyclingSaveEvent());
+                          });
                         },
                         child: Container(
                           width: double.infinity,
@@ -64,34 +87,41 @@ class RecyclingRequestScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                         ),
-                      );
-                    },
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.all(AppPadding.p16),
-                      padding:
-                          const EdgeInsets.symmetric(vertical: AppPadding.p16),
-                      decoration: BoxDecoration(
-                        color: ColorManager.white,
-                        borderRadius:
-                            BorderRadius.circular(AppBorderRadius.s15),
                       ),
-                      child: Text(
-                        "طلب تدوير",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                    ),
+                      _recyclingSaveButton(context),
+                    ],
                   ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _recyclingSaveButton(BuildContext context) {
+    return BlocBuilder<RecyclingRequestBloc, RecyclingRequestState>(
+      builder: (context, state) {
+        return GestureDetector(
+          onTap: () =>
+              context.read<RecyclingRequestBloc>().add(RecyclingSaveEvent()),
+          child: Container(
+            width: double.infinity,
+            margin: const EdgeInsets.all(AppPadding.p16),
+            padding: const EdgeInsets.symmetric(vertical: AppPadding.p16),
+            decoration: BoxDecoration(
+              color: ColorManager.white,
+              borderRadius: BorderRadius.circular(AppBorderRadius.s15),
+            ),
+            child: Text(
+              "طلب تدوير",
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+        );
+      },
     );
   }
 

@@ -18,6 +18,7 @@ import 'package:tadwer_app/company/domain/usecases/get_all_category_usecase.dart
 import 'package:tadwer_app/company/domain/usecases/get_all_company_type_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
+import 'package:tadwer_app/company/presentation/controller/bloc_address/address_bloc.dart';
 import 'package:tadwer_app/company/presentation/controller/bloc_basket/basket_bloc.dart';
 import 'package:tadwer_app/company/presentation/controller/bloc_recycling_request/recycling_request_bloc.dart';
 import 'package:tadwer_app/company/presentation/controller/company_type_bloc/company_type_bloc.dart';
@@ -39,12 +40,8 @@ class ServicesLocator {
     );
     getIt.registerFactory(() => WasteBloc(getIt(), getIt()));
     getIt.registerFactory(() => BasketBloc(getIt(), getIt()));
-    getIt.registerFactory(() => RecyclingRequestBloc(
-          getIt(),
-          getIt(),
-          getIt(),
-          getIt(),
-        ));
+    getIt.registerFactory(() => RecyclingRequestBloc(getIt(), getIt()));
+    getIt.registerFactory(() => AddressBloc(getIt(), getIt(), getIt()));
 
     //Use Case
     getIt.registerLazySingleton(() => CheckLogInUseCase(getIt()));
