@@ -80,13 +80,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
         decorationThickness: 0,
       ),
       decoration: InputDecoration(
-        prefixIcon: widget.hasIcon ? Icon(widget.icon) : const SizedBox(),
-        prefixIconColor: MaterialStateColor.resolveWith((states) =>
-            states.contains(MaterialState.focused)
-                ? ColorManager.white
-                : ColorManager.white),
-        hintText: widget.hintText,
-        hintStyle: TextStyle(
+          prefixIcon: widget.hasIcon ? Icon(widget.icon) : const SizedBox(),
+          prefixIconColor: MaterialStateColor.resolveWith((states) =>
+              states.contains(MaterialState.focused)
+                  ? ColorManager.white
+                  : ColorManager.white),
+          hintText: widget.hintText,
+          hintStyle: TextStyle(
             color: ColorManager.white,
             fontSize: 15.sp,
             shadows: const [
@@ -94,14 +94,22 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   color: ColorManager.darkBink,
                   blurRadius: 1,
                   offset: Offset(1, 1))
-            ]),
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: ColorManager.white),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Color.fromARGB(255, 173, 123, 123)),
-        ),
-      ),
+            ],
+          ),
+          errorStyle: TextStyle(
+            fontSize: 10.sp,
+            color: ColorManager.white,
+            fontWeight: FontWeight.w100,
+            decorationThickness: 0,
+          ),
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: ColorManager.white),
+          ),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Color.fromARGB(255, 173, 123, 123)),
+          ),
+          errorBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: ColorManager.white))),
     );
   }
 }

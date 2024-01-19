@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/auth/presentation/components/custom_text_field.dart';
 import 'package:tadwer_app/auth/presentation/controller/login_bloc.dart';
+import 'package:tadwer_app/core/constanses.dart';
+import 'package:tadwer_app/core/global/unique_key.dart';
+import 'package:tadwer_app/core/global/widget/show_loading_dialog.dart';
 import 'package:tadwer_app/core/services/services_locator.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
@@ -24,11 +27,14 @@ class LogInScreen extends StatelessWidget {
         body: SafeArea(
           child: BlocListener<LoginBloc, LoginState>(
             listener: (context, state) {
+              if (state.requestState == SignInRequestState.loading) {
+                LoadingDialog.show(context, key: UnKey.unKey1);
+              }
               if (state.requestState == SignInRequestState.error) {
-                ScaffoldMessenger.of(context).clearSnackBars();
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text(state.errorMessage)));
+                LoadingDialog.hide(context);
+                AppConstanse.messageWarning(state.errorMessage, context);
               } else if (state.requestState == SignInRequestState.success) {
+                LoadingDialog.hide(context);
                 if (state.user!.compRef == 0) {
                   Navigator.pushReplacementNamed(context, Routes.companyType);
                 } else {
@@ -36,37 +42,23 @@ class LogInScreen extends StatelessWidget {
                 }
               }
             },
-            child: BlocBuilder<LoginBloc, LoginState>(
-              builder: (context, state) {
-                return Stack(
-                  children: [
-                    if (state.requestState == SignInRequestState.loading)
-                      Container(
-                        color: Colors.transparent,
-                        child: Center(
-                          child: SizedBox(
-                              height: 10.h,
-                              width: 20.w,
-                              child: const CircularProgressIndicator()),
-                        ),
-                      ),
-                    SizedBox(
-                      height: 100.h,
-                      width: 100.w,
-                      child: Image.asset(
-                        ImagesAssets.logInBackgroundImage,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(AppPadding.p16),
-                        child: _logInForm(name, password, context),
-                      ),
-                    ),
-                  ],
-                );
-              },
+            child: Stack(
+              children: [
+                SizedBox(
+                  height: 100.h,
+                  width: 100.w,
+                  child: Image.asset(
+                    ImagesAssets.logInBackgroundImage,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppPadding.p16),
+                    child: _logInForm(name, password, context),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -115,6 +107,7 @@ class LogInScreen extends StatelessWidget {
             controller: password,
             hintText: "Password",
             icon: Icons.lock,
+            textInputAction: TextInputAction.done,
             suffixIcon: const SizedBox.shrink(),
             validator: (value) {
               if (value == "") {
@@ -123,29 +116,39 @@ class LogInScreen extends StatelessWidget {
               return null;
             },
           ),
-          SizedBox(height: 3.h),
-          GestureDetector(
-            onTap: () {
-              if (_formKey.currentState!.validate()) {
-                context.read<LoginBloc>().add(
-                    CheckLogInEvent(name: name.text, password: password.text));
-              }
-            },
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(
-                vertical: AppPadding.p8,
-              ),
-              color: ColorManager.black,
-              child: Text(
-                "LOGIN",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.displaySmall,
-              ),
-            ),
-          ),
+          SizedBox(height: 5.h),
+          _logInButtom(context, name, password),
         ],
       ),
+    );
+  }
+
+  Widget _logInButtom(BuildContext context, TextEditingController name,
+      TextEditingController password) {
+    return BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        return GestureDetector(
+          onTap: () {
+            if (_formKey.currentState!.validate()) {
+              context.read<LoginBloc>().add(
+                  CheckLogInEvent(name: name.text, password: password.text));
+            }
+          },
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(
+              vertical: AppPadding.p8,
+            ),
+            decoration:
+                BoxDecoration(border: Border.all(color: ColorManager.white)),
+            child: Text(
+              "LOGIN",
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+          ),
+        );
+      },
     );
   }
 }
