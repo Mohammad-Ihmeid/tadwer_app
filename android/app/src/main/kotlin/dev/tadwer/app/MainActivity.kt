@@ -1,4 +1,4 @@
-package com.example.tadwer_app
+package dev.tadwer.app
 
 import io.flutter.embedding.android.FlutterActivity
 
