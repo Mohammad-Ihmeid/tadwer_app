@@ -33,7 +33,7 @@ Future<dynamic> showAddAddressDialog(BuildContext context) {
             AppConstanse.messageWarning(state.saveAddressError, context);
           } else if (state.saveAddressState == SaveState.success) {
             LoadingDialog.hide(context);
-            showCustomSaveDialog(context).then((value) {
+            showCustomSaveDialog(context, "تم الحفظ بنجاح").then((value) {
               Navigator.pop(context);
             });
           }

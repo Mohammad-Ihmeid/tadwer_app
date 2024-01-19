@@ -14,13 +14,12 @@ class GetWasteByCategoryEvent extends WasteEvent {
 }
 
 class ShowWasteDetEvent extends WasteEvent {
-  final int wasteID;
-  final bool showWasteDet;
+  final int westRef;
 
-  const ShowWasteDetEvent({required this.wasteID, required this.showWasteDet});
+  const ShowWasteDetEvent(this.westRef);
 
   @override
-  List<Object?> get props => [wasteID, showWasteDet];
+  List<Object?> get props => [westRef];
 }
 
 class AddWasteToBasketEvent extends WasteEvent {

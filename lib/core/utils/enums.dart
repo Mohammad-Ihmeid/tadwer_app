@@ -24,3 +24,8 @@ enum SaveState {
   error,
   success,
 }
+
+enum ChangeListState {
+  status1,
+  status2,
+}

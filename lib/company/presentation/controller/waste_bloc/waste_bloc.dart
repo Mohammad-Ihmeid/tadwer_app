@@ -21,10 +21,24 @@ class WasteBloc extends Bloc<WasteEvent, WasteState> {
     on<AddWasteToBasketEvent>(_addWasteToBasketEvent);
 
     on<ShowWasteDetEvent>((event, emit) {
+      List<Waste> list = state.listWaste.map((e) {
+        if (e.westRef == event.westRef) {
+          e.showWest = !e.showWest;
+        } else {
+          e.showWest = false;
+        }
+        return e;
+      }).toList();
+      ChangeListState change = state.changeListWaste;
+      if (change == ChangeListState.status1) {
+        change = ChangeListState.status2;
+      } else {
+        change = ChangeListState.status1;
+      }
       emit(state.copyWith(
-        wasteID: event.wasteID,
-        showWasteDet: event.showWasteDet,
         addBasketState: BottomState.prePress,
+        listWaste: list,
+        changeListWaste: change,
       ));
     });
   }

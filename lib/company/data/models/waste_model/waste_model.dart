@@ -1,10 +1,11 @@
 import 'package:tadwer_app/company/domain/entities/waste_entities/waste.dart';
 
 class WasteModel extends Waste {
-  const WasteModel({required super.id, required super.wasteName});
+  WasteModel(
+      {required super.westRef, required super.wasteName, super.showWest});
 
   factory WasteModel.fromJson(Map<String, dynamic> json) => WasteModel(
-        id: json["id"],
+        westRef: json["id"],
         wasteName: json["wasteName"],
       );
 }

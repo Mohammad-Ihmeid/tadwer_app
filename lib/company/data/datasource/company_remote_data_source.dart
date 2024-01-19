@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tadwer_app/company/data/models/address_model.dart';
 import 'package:tadwer_app/company/data/models/basket_model/data_basket_model.dart';
 import 'package:tadwer_app/company/data/models/category_model.dart';
-import 'package:tadwer_app/company/data/models/waste_model.dart';
+import 'package:tadwer_app/company/data/models/waste_model/waste_model.dart';
 import 'package:tadwer_app/company/domain/usecases/address_usecase/add_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/address_usecase/update_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/basket_usecase/delete_basket_by_west_usecase.dart';
@@ -14,7 +14,6 @@ import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_use
 import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/basket_usecase/add_basket_usecase.dart';
-import 'package:tadwer_app/company/domain/usecases/basket_usecase/update_quantity_or_add_usecase.dart';
 import 'package:tadwer_app/core/error/exceptions.dart';
 import 'package:tadwer_app/core/network/api_constance.dart';
 import 'package:tadwer_app/core/network/error_message_model.dart';
@@ -44,8 +43,6 @@ abstract class BaseCompanyRemoteDataSource {
   Future<List<DataBasketModel>> getDataBasket(NoParameters parameters);
 
   Future<bool> addBasket(AddBasketParameters parameters);
-
-  Future<String> updateQuantityOrAdd(UpdateQuantityOrAddParameters parameters);
 
   ////////////////////////////////////////////////////////////
 
@@ -172,29 +169,6 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
     final response = await http.put(
       Uri.parse(ApiConstance.updateUser),
       body: json.encode(parameters.user.toModel().toJson()),
-      headers: {
-        "content-type": "application/json",
-        "accept": "application/json",
-      },
-    );
-
-    if (response.statusCode == 200) {
-      var responseJson = json.decode(response.body);
-      return responseJson;
-    } else {
-      var responseJson = json.decode(response.body);
-      throw RemoteExceptions(
-        errorMessageModel: ErrorMessageModel.fromJson(responseJson),
-      );
-    }
-  }
-
-  @override
-  Future<String> updateQuantityOrAdd(
-      UpdateQuantityOrAddParameters parameters) async {
-    final response = await http.post(
-      Uri.parse(ApiConstance.updateQuantityOrAddPath),
-      body: json.encode(parameters.quantity.toModel().toJson()),
       headers: {
         "content-type": "application/json",
         "accept": "application/json",

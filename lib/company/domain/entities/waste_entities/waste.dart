@@ -1,12 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:equatable/equatable.dart';
-
-class Waste extends Equatable {
-  final int id;
+class Waste {
+  final int westRef;
   final String wasteName;
+  bool showWest;
 
-  const Waste({required this.id, required this.wasteName});
-
-  @override
-  List<Object> get props => [id, wasteName];
+  Waste({
+    required this.westRef,
+    required this.wasteName,
+    this.showWest = false,
+  });
 }

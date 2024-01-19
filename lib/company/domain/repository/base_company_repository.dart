@@ -10,7 +10,6 @@ import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_use
 import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/basket_usecase/add_basket_usecase.dart';
-import 'package:tadwer_app/company/domain/usecases/basket_usecase/update_quantity_or_add_usecase.dart';
 import 'package:tadwer_app/core/error/failure.dart';
 import 'package:tadwer_app/company/domain/entities/company_type.dart';
 import 'package:tadwer_app/core/usecase/base_usecase.dart';
@@ -28,9 +27,6 @@ abstract class BaseCompanyRepository {
 
   Future<Either<Failure, String>> connectUserWithCompany(
       ConnectUserWithCompanyParameters parameters);
-
-  Future<Either<Failure, String>> updateQuantityOrAdd(
-      UpdateQuantityOrAddParameters parameters);
 
   ///////////////////////////////////////////////////
 

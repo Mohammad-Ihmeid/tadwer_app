@@ -3,9 +3,8 @@ part of 'waste_bloc.dart';
 class WasteState extends Equatable {
   final List<Waste> listWaste;
   final RequestState requestWasteState;
+  final ChangeListState changeListWaste;
   final String errorWasteMessage;
-  final int wasteID;
-  final bool showWasteDet;
   /* ------------------------------------- */
   final BottomState addBasketState;
   final String errorAddBasket;
@@ -13,9 +12,8 @@ class WasteState extends Equatable {
   const WasteState({
     this.listWaste = const [],
     this.requestWasteState = RequestState.loading,
+    this.changeListWaste = ChangeListState.status1,
     this.errorWasteMessage = '',
-    this.wasteID = 0,
-    this.showWasteDet = false,
     this.addBasketState = BottomState.prePress,
     this.errorAddBasket = '',
   });
@@ -23,18 +21,16 @@ class WasteState extends Equatable {
   WasteState copyWith({
     List<Waste>? listWaste,
     RequestState? requestWasteState,
+    ChangeListState? changeListWaste,
     String? errorWasteMessage,
-    int? wasteID,
-    bool? showWasteDet,
     BottomState? addBasketState,
     String? errorAddBasket,
   }) {
     return WasteState(
       listWaste: listWaste ?? this.listWaste,
       requestWasteState: requestWasteState ?? this.requestWasteState,
+      changeListWaste: changeListWaste ?? this.changeListWaste,
       errorWasteMessage: errorWasteMessage ?? this.errorWasteMessage,
-      wasteID: wasteID ?? this.wasteID,
-      showWasteDet: showWasteDet ?? this.showWasteDet,
       addBasketState: addBasketState ?? this.addBasketState,
       errorAddBasket: errorAddBasket ?? this.errorAddBasket,
     );
@@ -44,9 +40,8 @@ class WasteState extends Equatable {
   List<Object> get props => [
         listWaste,
         requestWasteState,
+        changeListWaste,
         errorWasteMessage,
-        wasteID,
-        showWasteDet,
         addBasketState,
         errorAddBasket,
       ];

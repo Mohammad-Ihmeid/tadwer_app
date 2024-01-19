@@ -3,13 +3,13 @@ import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/core/utils/color_manger.dart';
 import 'package:tadwer_app/core/utils/values_manager.dart';
 
-Future<dynamic> showCustomSaveDialog(BuildContext context) {
+Future<dynamic> showCustomSaveDialog(BuildContext context, String title) {
   return showAdaptiveDialog(
     context: context,
     builder: (context) => AlertDialog.adaptive(
       backgroundColor: ColorManager.white,
       title: Text(
-        "تم الحفظ بنجاح",
+        title,
         textAlign: TextAlign.center,
         style: TextStyle(
           color: ColorManager.darkBink,
