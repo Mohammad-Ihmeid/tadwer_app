@@ -5,6 +5,7 @@ import 'package:tadwer_app/company/domain/entities/category.dart';
 import 'package:tadwer_app/company/domain/entities/waste_entities/waste.dart';
 import 'package:tadwer_app/company/domain/usecases/address_usecase/add_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/address_usecase/update_address_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/basket_usecase/delete_basket_by_west_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
@@ -25,13 +26,18 @@ abstract class BaseCompanyRepository {
   Future<Either<Failure, List<Waste>>> getWasteByCategory(
       GetWasteByCategoryParameters parameters);
 
-  Future<Either<Failure, bool>> addBasket(AddBasketParameters parameters);
-
   Future<Either<Failure, String>> connectUserWithCompany(
       ConnectUserWithCompanyParameters parameters);
 
   Future<Either<Failure, String>> updateQuantityOrAdd(
       UpdateQuantityOrAddParameters parameters);
+
+  ///////////////////////////////////////////////////
+
+  Future<Either<Failure, bool>> addBasket(AddBasketParameters parameters);
+
+  Future<Either<Failure, bool>> deleteBasketByWest(
+      DeleteBasketByWestParameters parameters);
 
   ///////////////////////////////////////////////////
 

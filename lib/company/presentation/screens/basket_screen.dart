@@ -39,7 +39,7 @@ class BasketScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 5.h),
-                const DataBasketComponent(),
+                DataBasketComponent(),
               ],
             ),
           ],

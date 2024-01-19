@@ -9,6 +9,7 @@ import 'package:tadwer_app/company/data/models/category_model.dart';
 import 'package:tadwer_app/company/data/models/waste_model.dart';
 import 'package:tadwer_app/company/domain/usecases/address_usecase/add_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/address_usecase/update_address_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/basket_usecase/delete_basket_by_west_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
@@ -33,6 +34,10 @@ abstract class BaseCompanyRemoteDataSource {
 
   Future<String> connectUserWithCompany(
       ConnectUserWithCompanyParameters parameters);
+
+  ////////////////////////////////////////////////////////////
+
+  Future<bool> deleteBasketByWest(DeleteBasketByWestParameters parameters);
 
   ////////////////////////////////////////////////////////////
 
@@ -298,6 +303,28 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
           (e) => DataBasketModel.fromJson(e),
         ),
       );
+    } else {
+      var responseJson = json.decode(response.body);
+      throw RemoteExceptions(
+        errorMessageModel: ErrorMessageModel.fromJson(responseJson),
+      );
+    }
+  }
+
+  @override
+  Future<bool> deleteBasketByWest(
+      DeleteBasketByWestParameters parameters) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    debugPrint(ApiConstance.deleteBasketByWestPath(
+        prefs.getInt("Uid") ?? 0, parameters.wastRef));
+    final response = await http.delete(
+      Uri.parse(ApiConstance.deleteBasketByWestPath(
+          prefs.getInt("Uid") ?? 0, parameters.wastRef)),
+    );
+
+    if (response.statusCode == 200) {
+      var responseJson = json.decode(response.body);
+      return responseJson["success"];
     } else {
       var responseJson = json.decode(response.body);
       throw RemoteExceptions(

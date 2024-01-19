@@ -20,10 +20,15 @@ class ApiConstance {
 
   //Basket
   static String addBasketPath = "${baseURL}Basket/AddBasket";
+
   static String getDataBasketPath(int uID) =>
       "${baseURL}Basket/GetDataBasket/$uID";
+
   static String updateQuantityOrAddPath =
       "${baseURL}Quantity/UpdateQuantityOrAdd";
+
+  static String deleteBasketByWestPath(int uID, int wastRef) =>
+      "${baseURL}Basket/DeleteBasketByWest/$wastRef/$uID";
 
   //Address
   static String addAddressPath = "${baseURL}Address/AddAddress";
