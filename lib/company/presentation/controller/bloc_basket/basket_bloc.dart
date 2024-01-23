@@ -19,17 +19,8 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
   ) : super(const BasketState()) {
     on<GetDataBasketEvent>(_getDataBasketEvent);
     on<DeleteBasketByWestEvent>((event, emit) async {
-      emit(state.copyWith(deleteWasteState: SaveState.loading));
-
-      final result = await deleteBasketByWestUseCase(
+      await deleteBasketByWestUseCase(
           DeleteBasketByWestParameters(event.wastRef));
-
-      result.fold((l) {
-        emit(state.copyWith(
-            deleteWasteState: SaveState.error, deleteWasteError: l.message));
-      }, (r) {
-        emit(state.copyWith(deleteWasteState: SaveState.success));
-      });
     });
   }
 
