@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+import 'package:tadwer_app/company/domain/entities/basket_entities/data_basket.dart';
+import 'package:tadwer_app/company/presentation/components/basket_component/update_basket_component.dart';
 import 'package:tadwer_app/company/presentation/controller/bloc_basket/basket_bloc.dart';
 import 'package:tadwer_app/core/constanses.dart';
 import 'package:tadwer_app/core/global/widget/show_error_widget.dart';
@@ -47,7 +49,7 @@ class DataBasketComponent extends StatelessWidget {
                 ),
               );
             } else {
-              return _listWaste();
+              return Expanded(child: _listWaste());
             }
         }
       },
@@ -95,19 +97,46 @@ class DataBasketComponent extends StatelessWidget {
                         borderRadius:
                             BorderRadius.circular(AppBorderRadius.s15)),
                     child: Padding(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: AppPadding.p4),
-                      child: Center(
-                        child: Text(
-                          element.wasteName,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: AppPadding.p8, horizontal: AppPadding.p8),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                element.count.toString(),
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              Text(
+                                element.wasteName,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              const SizedBox.shrink(),
+                            ],
+                          ),
+                          _listDet(element),
+                        ],
                       ),
                     ),
                   ),
                 ),
               );
             });
+      },
+    );
+  }
+
+  Widget _listDet(DataBasket element) {
+    return BlocBuilder<BasketBloc, BasketState>(
+      buildWhen: (previous, current) =>
+          previous.changeWasteState != current.changeWasteState,
+      builder: (context, state) {
+        return element.showEdite
+            ? UpdateBasketComponent(dataBasket: element)
+            : const SizedBox.shrink();
       },
     );
   }
@@ -128,18 +157,21 @@ Future<bool> showCustomDeleteDialog(BuildContext context) {
           fontWeight: FontWeight.w600,
         ),
       ),
+      actionsAlignment: MainAxisAlignment.center,
       actions: [
         GestureDetector(
           onTap: () {
             delete = false;
             Navigator.pop(context);
           },
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            color: Colors.transparent,
-            child: Text(
-              'لا',
-              style: Theme.of(context).textTheme.titleLarge,
+          child: Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              color: Colors.transparent,
+              child: Text(
+                'لا',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
             ),
           ),
         ),
@@ -148,12 +180,14 @@ Future<bool> showCustomDeleteDialog(BuildContext context) {
             delete = true;
             Navigator.pop(context);
           },
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            color: Colors.transparent,
-            child: Text(
-              'نعم',
-              style: Theme.of(context).textTheme.titleLarge,
+          child: Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              color: Colors.transparent,
+              child: Text(
+                'نعم',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
             ),
           ),
         )

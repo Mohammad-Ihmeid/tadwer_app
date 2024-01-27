@@ -45,27 +45,28 @@ class RecyclingRequestScreen extends StatelessWidget {
         },
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          body: SafeArea(
-            child: Stack(
-              children: [
-                SizedBox(
-                  width: 100.w,
-                  height: 100.h,
-                  child: Image.asset(
-                    ImagesAssets.backgroundImage,
-                    fit: BoxFit.cover,
-                  ),
+          body: Stack(
+            children: [
+              SizedBox(
+                width: 100.w,
+                height: 100.h,
+                child: Image.asset(
+                  ImagesAssets.backgroundImage,
+                  fit: BoxFit.cover,
                 ),
-                SingleChildScrollView(
+              ),
+              SafeArea(
+                child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      CustomAppBar.appBar(context),
+                      CustomAppBar.appBar(context: context),
                       listDataBasket(),
                       GestureDetector(
                         onTap: () {
-                          showAddressDialog(context).then((value) {
+                          ShowAddressDialog.show(context, key: UniqueKey())
+                              .then((value) {
                             context
                                 .read<RecyclingRequestBloc>()
                                 .add(RecyclingSaveEvent());
@@ -92,8 +93,8 @@ class RecyclingRequestScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

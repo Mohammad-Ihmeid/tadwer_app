@@ -1,12 +1,13 @@
 import 'package:tadwer_app/company/domain/entities/basket_entities/data_basket.dart';
 
 class DataBasketModel extends DataBasket {
-  const DataBasketModel({
+  DataBasketModel({
     required super.count,
     required super.wasteName,
     required super.isSelect,
     required super.basId,
     required super.wastId,
+    super.showEdite,
   });
 
   factory DataBasketModel.fromJson(Map<String, dynamic> json) =>

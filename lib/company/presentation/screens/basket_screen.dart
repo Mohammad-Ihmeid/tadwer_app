@@ -16,8 +16,7 @@ class BasketScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<BasketBloc>()..add(GetDataBasketEvent()),
       child: Scaffold(
-        body: SafeArea(
-            child: Stack(
+        body: Stack(
           children: [
             SizedBox(
               width: 100.w,
@@ -27,23 +26,25 @@ class BasketScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CustomAppBar.appBar(context),
-                CustomHeader.customHeader(
-                  child: Text(
-                    "السلة",
-                    style: Theme.of(context).textTheme.headlineMedium,
+            SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CustomAppBar.appBar(context: context),
+                  CustomHeader.customHeader(
+                    child: Text(
+                      "السلة",
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
                   ),
-                ),
-                SizedBox(height: 5.h),
-                DataBasketComponent(),
-              ],
+                  SizedBox(height: 5.h),
+                  const DataBasketComponent(),
+                ],
+              ),
             ),
           ],
-        )),
+        ),
       ),
     );
   }

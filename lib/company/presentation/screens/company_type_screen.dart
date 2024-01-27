@@ -19,21 +19,21 @@ class CompanyTypeScreen extends StatelessWidget {
       create: (context) =>
           getIt<CompanyTypeBloc>()..add(GetAllCompanyTypeEvent()),
       child: Scaffold(
-        body: SafeArea(
-          child: Stack(
-            children: [
-              SizedBox(
-                width: 100.w,
-                height: 100.h,
-                child: Image.asset(
-                  ImagesAssets.backgroundImage,
-                  fit: BoxFit.cover,
-                ),
+        body: Stack(
+          children: [
+            SizedBox(
+              width: 100.w,
+              height: 100.h,
+              child: Image.asset(
+                ImagesAssets.backgroundImage,
+                fit: BoxFit.cover,
               ),
-              Column(
+            ),
+            SafeArea(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CustomAppBar.appBar(context),
+                  CustomAppBar.appBar(context: context, showBackIcon: false),
                   Text(
                     " ما نوع منشئتك ؟",
                     textAlign: TextAlign.right,
@@ -54,8 +54,8 @@ class CompanyTypeScreen extends StatelessWidget {
                   const CompanyTypeComponent(),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

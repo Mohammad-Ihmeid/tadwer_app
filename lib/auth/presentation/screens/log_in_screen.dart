@@ -24,42 +24,42 @@ class LogInScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<LoginBloc>(),
       child: Scaffold(
-        body: SafeArea(
-          child: BlocListener<LoginBloc, LoginState>(
-            listener: (context, state) {
-              if (state.requestState == SignInRequestState.loading) {
-                LoadingDialog.show(context, key: UnKey.unKey1);
+        body: BlocListener<LoginBloc, LoginState>(
+          listener: (context, state) {
+            if (state.requestState == SignInRequestState.loading) {
+              LoadingDialog.show(context, key: UnKey.unKey1);
+            }
+            if (state.requestState == SignInRequestState.error) {
+              LoadingDialog.hide(context);
+              AppConstanse.messageWarning(state.errorMessage, context);
+            } else if (state.requestState == SignInRequestState.success) {
+              LoadingDialog.hide(context);
+              if (state.user!.compRef == 0) {
+                Navigator.pushReplacementNamed(context, Routes.companyType);
+              } else {
+                Navigator.pushReplacementNamed(context, Routes.categoryType);
               }
-              if (state.requestState == SignInRequestState.error) {
-                LoadingDialog.hide(context);
-                AppConstanse.messageWarning(state.errorMessage, context);
-              } else if (state.requestState == SignInRequestState.success) {
-                LoadingDialog.hide(context);
-                if (state.user!.compRef == 0) {
-                  Navigator.pushReplacementNamed(context, Routes.companyType);
-                } else {
-                  Navigator.pushReplacementNamed(context, Routes.categoryType);
-                }
-              }
-            },
-            child: Stack(
-              children: [
-                SizedBox(
-                  height: 100.h,
-                  width: 100.w,
-                  child: Image.asset(
-                    ImagesAssets.logInBackgroundImage,
-                    fit: BoxFit.cover,
-                  ),
+            }
+          },
+          child: Stack(
+            children: [
+              SizedBox(
+                height: 100.h,
+                width: 100.w,
+                child: Image.asset(
+                  ImagesAssets.logInBackgroundImage,
+                  fit: BoxFit.cover,
                 ),
-                Center(
+              ),
+              SafeArea(
+                child: Center(
                   child: Padding(
                     padding: const EdgeInsets.all(AppPadding.p16),
                     child: _logInForm(name, password, context),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

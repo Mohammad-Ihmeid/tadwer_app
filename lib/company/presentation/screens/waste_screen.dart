@@ -24,8 +24,7 @@ class WasteScreen extends StatelessWidget {
       create: (context) =>
           getIt<WasteBloc>()..add(GetWasteByCategoryEvent(catId)),
       child: Scaffold(
-        body: SafeArea(
-            child: Stack(
+        body: Stack(
           children: [
             SizedBox(
               width: 100.w,
@@ -35,68 +34,72 @@ class WasteScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomAppBar.appBar(context),
-                  CustomHeader.customHeader(
-                    child: Text(
-                      categoryName,
-                      style: Theme.of(context).textTheme.headlineMedium,
+            SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CustomAppBar.appBar(context: context),
+                    CustomHeader.customHeader(
+                      child: Text(
+                        categoryName,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 5.h),
-                  WasteTypeComponent(),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        GestureDetector(
-                          onTap: () => Navigator.pushNamed(
-                              context, Routes.recyclingRequest),
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                IconsAssets.logoApp,
-                                color: Colors.white,
-                                width: 20.w,
-                                height: 10.h,
-                              ),
-                              Text(
-                                "طلب تدوير",
-                                style: Theme.of(context).textTheme.titleMedium,
-                              )
-                            ],
+                    SizedBox(height: 5.h),
+                    WasteTypeComponent(),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          GestureDetector(
+                            onTap: () => Navigator.pushNamed(
+                                context, Routes.recyclingRequest),
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  IconsAssets.logoApp,
+                                  color: Colors.white,
+                                  width: 20.w,
+                                  height: 10.h,
+                                ),
+                                Text(
+                                  "طلب تدوير",
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: () =>
-                              Navigator.pushNamed(context, Routes.basket),
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                ImagesAssets.basketImage,
-                                width: 20.w,
-                                height: 10.h,
-                              ),
-                              Text(
-                                "السلة",
-                                style: Theme.of(context).textTheme.titleMedium,
-                              )
-                            ],
+                          GestureDetector(
+                            onTap: () =>
+                                Navigator.pushNamed(context, Routes.basket),
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  ImagesAssets.basketImage,
+                                  width: 20.w,
+                                  height: 10.h,
+                                ),
+                                Text(
+                                  "السلة",
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             )
           ],
-        )),
+        ),
       ),
     );
   }

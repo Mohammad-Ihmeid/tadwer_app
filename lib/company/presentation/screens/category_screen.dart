@@ -19,8 +19,7 @@ class CategoryScreen extends StatelessWidget {
         ..add(GetCompanyTypeByIdEvent()),
       lazy: false,
       child: Scaffold(
-        body: SafeArea(
-            child: Stack(
+        body: Stack(
           children: [
             SizedBox(
               width: 100.w,
@@ -30,26 +29,28 @@ class CategoryScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomAppBar.appBar(context),
-                BlocBuilder<CompanyTypeBloc, CompanyTypeState>(
-                  builder: (context, state) {
-                    return CustomHeader.customHeader(
-                      child: Text(
-                        state.companyName,
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                    );
-                  },
-                ),
-                SizedBox(height: 5.h),
-                const CategoryTypeComponent(),
-              ],
+            SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomAppBar.appBar(context: context, showBackIcon: false),
+                  BlocBuilder<CompanyTypeBloc, CompanyTypeState>(
+                    builder: (context, state) {
+                      return CustomHeader.customHeader(
+                        child: Text(
+                          state.companyName,
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(height: 5.h),
+                  const CategoryTypeComponent(),
+                ],
+              ),
             )
           ],
-        )),
+        ),
       ),
     );
   }
