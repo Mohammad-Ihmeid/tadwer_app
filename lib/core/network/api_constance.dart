@@ -35,4 +35,7 @@ class ApiConstance {
   static String checkUserAddressPath(int uID) =>
       "${baseURL}Address/GetAddressByUid/$uID";
   static String updateAddressPath = "${baseURL}Address/UpdateAddress";
+
+  //Order
+  static String addOrderPath = "${baseURL}Order/AddOrder";
 }

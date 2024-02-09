@@ -14,6 +14,7 @@ import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_use
 import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/basket_usecase/add_basket_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/order_usecase/add_order_usecase.dart';
 import 'package:tadwer_app/core/error/exceptions.dart';
 import 'package:tadwer_app/core/network/api_constance.dart';
 import 'package:tadwer_app/core/network/error_message_model.dart';
@@ -51,6 +52,10 @@ abstract class BaseCompanyRemoteDataSource {
   Future<AddressModel> checkUserAddress(NoParameters parameters);
 
   Future<String> updateAddress(UpdateAddressParameters parameters);
+
+  ////////////////////////////////////////////////////////////
+
+  Future<String> addOrder(AddOrderParameters parameters);
 }
 
 class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
@@ -299,6 +304,28 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
     if (response.statusCode == 200) {
       var responseJson = json.decode(response.body);
       return responseJson["success"];
+    } else {
+      var responseJson = json.decode(response.body);
+      throw RemoteExceptions(
+        errorMessageModel: ErrorMessageModel.fromJson(responseJson),
+      );
+    }
+  }
+
+  @override
+  Future<String> addOrder(AddOrderParameters parameters) async {
+    final response = await http.post(
+      Uri.parse(ApiConstance.addOrderPath),
+      body: json.encode(parameters.order.toModel().toJson()),
+      headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var responseJson = json.decode(response.body);
+      return responseJson;
     } else {
       var responseJson = json.decode(response.body);
       throw RemoteExceptions(
