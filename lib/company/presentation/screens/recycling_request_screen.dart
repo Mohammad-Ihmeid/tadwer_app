@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/company/presentation/components/recycling_component/address_component.dart';
+import 'package:tadwer_app/company/presentation/components/recycling_component/days_num_component.dart';
 import 'package:tadwer_app/company/presentation/components/widget/custom_app_bar.dart';
 import 'package:tadwer_app/company/presentation/controller/bloc_recycling_request/recycling_request_bloc.dart';
 import 'package:tadwer_app/core/constanses.dart';
@@ -15,13 +16,7 @@ import 'package:tadwer_app/core/utils/enums.dart';
 import 'package:tadwer_app/core/utils/values_manager.dart';
 
 class RecyclingRequestScreen extends StatelessWidget {
-  final TextEditingController city = TextEditingController();
-  final TextEditingController area = TextEditingController();
-  final TextEditingController street = TextEditingController();
-  final TextEditingController phone = TextEditingController();
-  final TextEditingController buildNum = TextEditingController();
-  final TextEditingController additional = TextEditingController();
-  RecyclingRequestScreen({super.key});
+  const RecyclingRequestScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +35,7 @@ class RecyclingRequestScreen extends StatelessWidget {
             AppConstanse.messageWarning(state.recyclingError, context);
           } else if (state.recyclingSaveState == SaveState.success) {
             LoadingDialog.hide(context);
+            context.read<RecyclingRequestBloc>().add(GetDataBasketEvent());
             showCustomSaveDialog(context, "تم طلب التدوير بنجاح");
           }
         },
@@ -63,6 +59,8 @@ class RecyclingRequestScreen extends StatelessWidget {
                     children: [
                       CustomAppBar.appBar(context: context),
                       listDataBasket(),
+                      const Divider(color: ColorManager.white),
+                      const DaysNumComponent(),
                       GestureDetector(
                         onTap: () {
                           ShowAddressDialog.show(context, key: UniqueKey())

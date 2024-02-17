@@ -314,6 +314,7 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
 
   @override
   Future<String> addOrder(AddOrderParameters parameters) async {
+    debugPrint(json.encode(parameters.order.toModel().toJson()));
     final response = await http.post(
       Uri.parse(ApiConstance.addOrderPath),
       body: json.encode(parameters.order.toModel().toJson()),

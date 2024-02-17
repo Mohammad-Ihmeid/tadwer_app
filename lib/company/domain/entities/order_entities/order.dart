@@ -2,23 +2,21 @@
 import 'package:equatable/equatable.dart';
 import 'package:tadwer_app/company/data/models/order_model/order_model.dart';
 
-import 'package:tadwer_app/company/domain/entities/basket_entities/data_basket.dart';
-
-class Order extends Equatable {
-  final List<DataBasket> basketList;
-  final int daysNum;
+class OrderRequest extends Equatable {
+  final int basketId;
+  final List<int> daysNum;
   final int userId;
 
-  const Order({
-    required this.basketList,
+  const OrderRequest({
+    required this.basketId,
     required this.daysNum,
     required this.userId,
   });
 
   OrderModel toModel() {
-    return OrderModel(basketList: basketList, daysNum: daysNum, userId: userId);
+    return OrderModel(basketId: basketId, daysNum: daysNum, userId: userId);
   }
 
   @override
-  List<Object> get props => [basketList, daysNum, userId];
+  List<Object> get props => [basketId, daysNum, userId];
 }
