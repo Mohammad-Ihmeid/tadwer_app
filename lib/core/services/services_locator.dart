@@ -13,6 +13,7 @@ import 'package:tadwer_app/company/domain/usecases/address_usecase/check_address
 import 'package:tadwer_app/company/domain/usecases/address_usecase/update_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/basket_usecase/delete_basket_by_west_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/basket_usecase/get_data_basket.dart';
+import 'package:tadwer_app/company/domain/usecases/basket_usecase/update_basket_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_all_category_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_all_company_type_usecase.dart';
@@ -40,7 +41,7 @@ class ServicesLocator {
       ),
     );
     getIt.registerFactory(() => WasteBloc(getIt(), getIt()));
-    getIt.registerFactory(() => BasketBloc(getIt(), getIt()));
+    getIt.registerFactory(() => BasketBloc(getIt(), getIt(), getIt()));
     getIt.registerFactory(() => RecyclingRequestBloc(
           getIt(),
           getIt(),
@@ -59,6 +60,7 @@ class ServicesLocator {
     ////////////////////////////////////////////////////////////////
     getIt.registerLazySingleton(() => GetDataBasketUseCase(getIt()));
     getIt.registerLazySingleton(() => DeleteBasketByWestUseCase(getIt()));
+    getIt.registerLazySingleton(() => UpdateBasketUseCase(getIt()));
     ////////////////////////////////////////////////////////////////
     getIt.registerLazySingleton(() => AddUserAddressUseCase(getIt()));
     getIt.registerLazySingleton(() => CheckUserAddressUseCase(getIt()));

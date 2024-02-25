@@ -37,7 +37,7 @@ class WasteScreen extends StatelessWidget {
             SafeArea(
               child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     CustomAppBar.appBar(context: context),

@@ -29,9 +29,12 @@ class UpdateBasketComponent extends StatelessWidget {
             AppConstanse.messageWarning(state.updateWasteError, context);
           } else if (state.updateWasteState == BottomState.success) {
             LoadingDialog.hide(context);
+            context.read<BasketBloc>().add(GetDataBasketEvent());
             showCustomSaveDialog(context, "تم التعديل بنجاح");
           }
         },
+        buildWhen: (previous, current) =>
+            previous.updateWasteState != current.updateWasteState,
         builder: (context, state) {
           return Container(
             padding: const EdgeInsets.all(AppPadding.p8),
@@ -52,17 +55,15 @@ class UpdateBasketComponent extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        // context.read<BasketBloc>().add(
-                        //     AddWasteToBasketEvent(
-                        //       wasteID: item.westRef,
-                        //       count: count.text,
-                        //     ),
-                        //   );
+                        context.read<BasketBloc>().add(
+                              UpdateBasketEvent(count.text, dataBasket.wastId,
+                                  dataBasket.basId),
+                            );
                       },
                       child: Container(
                         color: Colors.transparent,
                         child: Text(
-                          "أضافة",
+                          "تعديل",
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ),

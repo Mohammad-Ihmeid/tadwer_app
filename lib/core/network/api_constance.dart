@@ -27,6 +27,8 @@ class ApiConstance {
   static String updateQuantityOrAddPath =
       "${baseURL}Quantity/UpdateQuantityOrAdd";
 
+  static String updateBasketPath = "${baseURL}Basket/UpdateBasket";
+
   static String deleteBasketByWestPath(int uID, int wastRef) =>
       "${baseURL}Basket/DeleteBasketByWest/$wastRef/$uID";
 

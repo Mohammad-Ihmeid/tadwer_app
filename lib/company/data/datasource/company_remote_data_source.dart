@@ -10,6 +10,7 @@ import 'package:tadwer_app/company/data/models/waste_model/waste_model.dart';
 import 'package:tadwer_app/company/domain/usecases/address_usecase/add_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/address_usecase/update_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/basket_usecase/delete_basket_by_west_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/basket_usecase/update_basket_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
@@ -44,6 +45,8 @@ abstract class BaseCompanyRemoteDataSource {
   Future<List<DataBasketModel>> getDataBasket(NoParameters parameters);
 
   Future<bool> addBasket(AddBasketParameters parameters);
+
+  Future<String> updateBasket(UpdateBasketParameters parameters);
 
   ////////////////////////////////////////////////////////////
 
@@ -318,6 +321,28 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
     final response = await http.post(
       Uri.parse(ApiConstance.addOrderPath),
       body: json.encode(parameters.order.toModel().toJson()),
+      headers: {
+        "content-type": "application/json",
+        "accept": "application/json",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var responseJson = json.decode(response.body);
+      return responseJson;
+    } else {
+      var responseJson = json.decode(response.body);
+      throw RemoteExceptions(
+        errorMessageModel: ErrorMessageModel.fromJson(responseJson),
+      );
+    }
+  }
+
+  @override
+  Future<String> updateBasket(UpdateBasketParameters parameters) async {
+    final response = await http.put(
+      Uri.parse(ApiConstance.updateBasketPath),
+      body: json.encode(parameters.updateBasket.toModel().toJson()),
       headers: {
         "content-type": "application/json",
         "accept": "application/json",

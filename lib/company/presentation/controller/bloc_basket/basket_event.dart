@@ -27,9 +27,11 @@ class ShowWasteDetEvent extends BasketEvent {
 }
 
 class UpdateBasketEvent extends BasketEvent {
+  final String count;
   final int wastRef;
+  final int basId;
 
-  const UpdateBasketEvent(this.wastRef);
+  const UpdateBasketEvent(this.count, this.wastRef, this.basId);
   @override
-  List<Object> get props => [wastRef];
+  List<Object> get props => [count, wastRef, basId];
 }

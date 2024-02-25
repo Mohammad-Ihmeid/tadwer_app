@@ -11,6 +11,7 @@ import 'package:tadwer_app/company/domain/repository/base_company_repository.dar
 import 'package:tadwer_app/company/domain/usecases/address_usecase/add_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/address_usecase/update_address_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/basket_usecase/delete_basket_by_west_usecase.dart';
+import 'package:tadwer_app/company/domain/usecases/basket_usecase/update_basket_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/connect_user_with_company_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_company_type_by_id_usecase.dart';
 import 'package:tadwer_app/company/domain/usecases/get_waste_by_category_usecase.dart';
@@ -178,6 +179,19 @@ class CompanyRepository extends BaseCompanyRepository {
       AddOrderParameters parameters) async {
     try {
       final result = await baseCompanyRemoteDataSource.addOrder(parameters);
+      return Right(result);
+    } on RemoteExceptions catch (failure) {
+      return Left(RemoteFailure(failure.errorMessageModel.errorMessage));
+    } catch (e) {
+      return const Left(RemoteFailure("حدث خطأ برمجي الرجاء المحاولة لاحقا"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> updateBasket(
+      UpdateBasketParameters parameters) async {
+    try {
+      final result = await baseCompanyRemoteDataSource.updateBasket(parameters);
       return Right(result);
     } on RemoteExceptions catch (failure) {
       return Left(RemoteFailure(failure.errorMessageModel.errorMessage));

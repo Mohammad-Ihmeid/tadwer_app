@@ -31,7 +31,7 @@ class CategoryScreen extends StatelessWidget {
             ),
             SafeArea(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   CustomAppBar.appBar(context: context, showBackIcon: false),
                   BlocBuilder<CompanyTypeBloc, CompanyTypeState>(

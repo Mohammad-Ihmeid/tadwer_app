@@ -49,7 +49,7 @@ class DataBasketComponent extends StatelessWidget {
                 ),
               );
             } else {
-              return Expanded(child: _listWaste());
+              return _listWaste();
             }
         }
       },
@@ -60,6 +60,7 @@ class DataBasketComponent extends StatelessWidget {
     return BlocBuilder<BasketBloc, BasketState>(
       builder: (context, state) {
         return ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: state.dataBasket.length,
             itemBuilder: (context, index) {
@@ -78,14 +79,9 @@ class DataBasketComponent extends StatelessWidget {
                 },
                 child: GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => WasteScreen(
-                    //         categoryName: element.name,
-                    //         catId: element.catId,
-                    //       ),
-                    //     ));
+                    context
+                        .read<BasketBloc>()
+                        .add(ShowWasteDetEvent(element.wastId));
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(
@@ -104,7 +100,6 @@ class DataBasketComponent extends StatelessWidget {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
                                 element.count.toString(),
@@ -117,6 +112,7 @@ class DataBasketComponent extends StatelessWidget {
                               const SizedBox.shrink(),
                             ],
                           ),
+                          SizedBox(height: 1.h),
                           _listDet(element),
                         ],
                       ),
