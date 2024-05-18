@@ -5,12 +5,12 @@ import 'package:tadwer_app/company/domain/repository/base_company_repository.dar
 import 'package:tadwer_app/core/error/failure.dart';
 import 'package:tadwer_app/core/usecase/base_usecase.dart';
 
-class AddOrderUseCase extends BaseUseCase<String, AddOrderParameters> {
+class AddOrderUseCase extends BaseUseCase<bool, AddOrderParameters> {
   final BaseCompanyRepository baseCompanyRepository;
 
   AddOrderUseCase(this.baseCompanyRepository);
   @override
-  Future<Either<Failure, String>> call(AddOrderParameters parameters) async {
+  Future<Either<Failure, bool>> call(AddOrderParameters parameters) async {
     return baseCompanyRepository.addOrder(parameters);
   }
 }

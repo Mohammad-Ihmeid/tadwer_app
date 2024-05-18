@@ -57,5 +57,5 @@ abstract class BaseCompanyRepository {
 
   ///////////////////////////////////////////////////
 
-  Future<Either<Failure, String>> addOrder(AddOrderParameters parameters);
+  Future<Either<Failure, bool>> addOrder(AddOrderParameters parameters);
 }

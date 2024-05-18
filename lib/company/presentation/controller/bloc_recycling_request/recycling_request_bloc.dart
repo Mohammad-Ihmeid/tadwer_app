@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tadwer_app/company/domain/entities/basket_entities/data_basket.dart';
@@ -18,6 +19,7 @@ class RecyclingRequestBloc
   final CheckUserAddressUseCase checkAddressUseCase;
   final GetDataBasketUseCase getDataBasketUseCase;
   final AddOrderUseCase addOrderUseCase;
+  final TextEditingController noteController = TextEditingController();
   RecyclingRequestBloc(
     this.checkAddressUseCase,
     this.getDataBasketUseCase,
@@ -62,6 +64,7 @@ class RecyclingRequestBloc
           basketId: state.dataBasket[0].basId,
           daysNum: state.daysList,
           userId: uid,
+          note: noteController.text,
         ),
       ));
 
@@ -73,6 +76,7 @@ class RecyclingRequestBloc
           ),
         );
       }, (r) {
+        noteController.clear();
         emit(state.copyWith(recyclingSaveState: SaveState.success));
       });
     }

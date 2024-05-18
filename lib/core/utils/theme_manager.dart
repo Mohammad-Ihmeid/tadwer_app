@@ -18,8 +18,20 @@ TextTheme _textTheme() {
   return TextTheme(
       headlineMedium: TextStyle(
         color: ColorManager.white,
+        shadows: const [
+          Shadow(
+            color: ColorManager.darkBink,
+            blurRadius: 1,
+            offset: Offset(1, 1),
+          ),
+        ],
         fontSize: 16.sp,
         fontWeight: FontWeight.w500,
+      ),
+      displayMedium: TextStyle(
+        color: ColorManager.white,
+        fontSize: 15.sp,
+        fontWeight: FontWeight.w400,
       ),
       titleLarge: TextStyle(
         color: ColorManager.darkBink,
@@ -28,6 +40,11 @@ TextTheme _textTheme() {
       ),
       titleMedium: TextStyle(
         color: ColorManager.white,
+        fontSize: 12.sp,
+        fontWeight: FontWeight.w400,
+      ),
+      titleSmall: TextStyle(
+        color: ColorManager.darkBink,
         fontSize: 12.sp,
         fontWeight: FontWeight.w400,
       ),

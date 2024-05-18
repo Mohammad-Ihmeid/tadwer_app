@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/company/presentation/components/recycling_component/address_component.dart';
 import 'package:tadwer_app/company/presentation/components/recycling_component/days_num_component.dart';
-import 'package:tadwer_app/company/presentation/components/widget/custom_app_bar.dart';
 import 'package:tadwer_app/company/presentation/controller/bloc_recycling_request/recycling_request_bloc.dart';
 import 'package:tadwer_app/core/constanses.dart';
+import 'package:tadwer_app/core/global/routes/app_routes.dart';
 import 'package:tadwer_app/core/global/unique_key.dart';
 import 'package:tadwer_app/core/global/widget/custom_save_dialog.dart';
 import 'package:tadwer_app/core/global/widget/show_loading_dialog.dart';
@@ -40,7 +40,7 @@ class RecyclingRequestScreen extends StatelessWidget {
           }
         },
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           body: Stack(
             children: [
               SizedBox(
@@ -57,7 +57,53 @@ class RecyclingRequestScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      CustomAppBar.appBar(context: context),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppPadding.p16,
+                          vertical: AppPadding.p30,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                              onTap: () =>
+                                  Navigator.pushNamed(context, Routes.userInfo),
+                              child: Container(
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: ColorManager.white),
+                                  color: Colors.transparent,
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.person_outline_rounded,
+                                    color: ColorManager.white,
+                                    size: 30.sp,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Image.asset(
+                              ImagesAssets.logoNameApp,
+                              color: ColorManager.white,
+                              width: 50.w,
+                            ),
+                            IconButton(
+                              onPressed: () => Navigator.pop(context),
+                              padding: EdgeInsets.zero,
+                              visualDensity: VisualDensity.compact,
+                              icon: Icon(
+                                Icons.arrow_forward_ios,
+                                color: ColorManager.white,
+                                size: 30.sp,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // CustomAppBar.appBar(context: context),
                       listDataBasket(),
                       const Divider(color: ColorManager.white),
                       const DaysNumComponent(),
@@ -72,9 +118,8 @@ class RecyclingRequestScreen extends StatelessWidget {
                         },
                         child: Container(
                           width: double.infinity,
-                          margin: const EdgeInsets.all(AppPadding.p16),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: AppPadding.p16),
+                          margin: const EdgeInsets.all(AppPadding.p8),
+                          padding: const EdgeInsets.all(AppPadding.p8),
                           decoration: BoxDecoration(
                             color: ColorManager.white,
                             borderRadius:
@@ -85,6 +130,28 @@ class RecyclingRequestScreen extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.all(AppPadding.p8),
+                        padding: const EdgeInsets.all(AppPadding.p8),
+                        decoration: BoxDecoration(
+                          color: ColorManager.white,
+                          borderRadius:
+                              BorderRadius.circular(AppBorderRadius.s15),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "أضافة ملاحظة",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                            SizedBox(width: 3.w),
+                            Expanded(child: noteWidget(context))
+                          ],
                         ),
                       ),
                       _recyclingSaveButton(context),
@@ -99,6 +166,16 @@ class RecyclingRequestScreen extends StatelessWidget {
     );
   }
 
+  Widget noteWidget(BuildContext context) {
+    return BlocBuilder<RecyclingRequestBloc, RecyclingRequestState>(
+      builder: (context, state) {
+        return TextField(
+          controller: context.read<RecyclingRequestBloc>().noteController,
+        );
+      },
+    );
+  }
+
   Widget _recyclingSaveButton(BuildContext context) {
     return BlocBuilder<RecyclingRequestBloc, RecyclingRequestState>(
       builder: (context, state) {
@@ -107,8 +184,8 @@ class RecyclingRequestScreen extends StatelessWidget {
               context.read<RecyclingRequestBloc>().add(RecyclingSaveEvent()),
           child: Container(
             width: double.infinity,
-            margin: const EdgeInsets.all(AppPadding.p16),
-            padding: const EdgeInsets.symmetric(vertical: AppPadding.p16),
+            margin: const EdgeInsets.all(AppPadding.p8),
+            padding: const EdgeInsets.all(AppPadding.p8),
             decoration: BoxDecoration(
               color: ColorManager.white,
               borderRadius: BorderRadius.circular(AppBorderRadius.s15),

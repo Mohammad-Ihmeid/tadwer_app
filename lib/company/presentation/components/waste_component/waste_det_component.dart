@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/company/domain/entities/waste_entities/waste.dart';
@@ -35,6 +37,7 @@ class WasteDetComponent extends StatelessWidget {
         builder: (context, state) {
           return Container(
             padding: const EdgeInsets.all(AppPadding.p8),
+            margin: const EdgeInsets.only(top: AppMargin.m8),
             decoration: BoxDecoration(
               color: ColorManager.white,
               borderRadius: BorderRadius.circular(AppBorderRadius.s15),
@@ -42,9 +45,10 @@ class WasteDetComponent extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  "تقدير العدد",
-                  style: Theme.of(context).textTheme.titleLarge,
+                Container(
+                  width: double.infinity,
+                  height: 5,
+                  color: ColorManager.darkBink,
                 ),
                 SizedBox(height: 1.h),
                 Row(
@@ -60,7 +64,7 @@ class WasteDetComponent extends StatelessWidget {
                       child: Container(
                         color: Colors.transparent,
                         child: Text(
-                          "أضافة",
+                          "اضافة كمية تقديرية",
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ),
@@ -78,15 +82,48 @@ class WasteDetComponent extends StatelessWidget {
                           fontSize: 15.sp,
                         ),
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.zero,
-                          filled: true,
-                          fillColor: Colors.grey,
+                          contentPadding: const EdgeInsets.only(left: 6),
+                          suffixText: "عدد",
+                          suffixStyle: TextStyle(
+                            color: ColorManager.darkBink,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.circular(AppBorderRadius.s15),
+                            borderSide: const BorderSide(
+                                color: ColorManager.darkBink, width: 2),
+                          ),
                           border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.circular(AppBorderRadius.s15)),
+                            borderRadius:
+                                BorderRadius.circular(AppBorderRadius.s15),
+                            borderSide: const BorderSide(
+                                color: ColorManager.darkBink, width: 2),
+                          ),
                           focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.circular(AppBorderRadius.s15)),
+                            borderRadius:
+                                BorderRadius.circular(AppBorderRadius.s15),
+                            borderSide: const BorderSide(
+                                color: ColorManager.darkBink, width: 2),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 2.w),
+                    GestureDetector(
+                      onTap: () => context.read<WasteBloc>().add(
+                            AddWasteToBasketEvent(
+                              wasteID: item.westRef,
+                              count: count.text,
+                            ),
+                          ),
+                      child: Container(
+                        color: Colors.transparent,
+                        child: Icon(
+                          Icons.done,
+                          color: ColorManager.darkBink,
+                          size: 25.sp,
                         ),
                       ),
                     ),

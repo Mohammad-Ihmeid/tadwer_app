@@ -3,7 +3,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tadwer_app/auth/domain/entities/user.dart';
+import 'package:tadwer_app/auth/domain/entities/user_info.dart';
 import 'package:tadwer_app/auth/domain/usecases/check_login_usecase.dart';
+import 'package:tadwer_app/auth/domain/usecases/get_user_info_usecase.dart';
+import 'package:tadwer_app/core/usecase/base_usecase.dart';
 import 'package:tadwer_app/core/utils/enums.dart';
 
 part 'login_event.dart';
@@ -11,10 +14,27 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final CheckLogInUseCase checkLogInUseCase;
+  final GetUserInfoUseCase getUserInfoUseCase;
 
-  LoginBloc(this.checkLogInUseCase) : super(const LoginState()) {
+  LoginBloc(this.checkLogInUseCase, this.getUserInfoUseCase)
+      : super(const LoginState()) {
     on<CheckLogInEvent>(_checkLogInEvent);
     on<SplashCheckLogInEvent>(_splashCheckLogInEvent);
+    on<GetUserInfoEvent>(_getUserInfoEvent);
+  }
+
+  FutureOr<void> _getUserInfoEvent(GetUserInfoEvent event, emit) async {
+    emit(state.copyWith(userInfoState: RequestState.loading));
+
+    final result = await getUserInfoUseCase(const NoParameters());
+
+    result.fold(
+      (error) => emit(state.copyWith(
+          userInfoError: error.message, userInfoState: RequestState.error)),
+      (userData) => emit(
+        state.copyWith(userInfo: userData, userInfoState: RequestState.loaded),
+      ),
+    );
   }
 
   FutureOr<void> _checkLogInEvent(

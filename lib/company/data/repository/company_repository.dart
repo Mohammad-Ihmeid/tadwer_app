@@ -175,8 +175,7 @@ class CompanyRepository extends BaseCompanyRepository {
   }
 
   @override
-  Future<Either<Failure, String>> addOrder(
-      AddOrderParameters parameters) async {
+  Future<Either<Failure, bool>> addOrder(AddOrderParameters parameters) async {
     try {
       final result = await baseCompanyRemoteDataSource.addOrder(parameters);
       return Right(result);

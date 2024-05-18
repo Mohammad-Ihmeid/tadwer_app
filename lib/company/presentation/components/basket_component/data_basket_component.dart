@@ -30,8 +30,9 @@ class DataBasketComponent extends StatelessWidget {
                     "حدث خطأ أثناء أحضار البيانات الرجاء أعادة المحاولة لاحقا");
           case RequestState.loaded:
             if (state.dataBasket.isEmpty) {
-              return Expanded(
-                child: Center(
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: AppPadding.p30),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -57,7 +58,12 @@ class DataBasketComponent extends StatelessWidget {
   }
 
   Widget _listWaste() {
-    return BlocBuilder<BasketBloc, BasketState>(
+    return BlocConsumer<BasketBloc, BasketState>(
+      listener: (context, state) {
+        if (state.deleteWasteState == SaveState.success) {
+          context.read<BasketBloc>().add(GetDataBasketEvent());
+        }
+      },
       builder: (context, state) {
         return ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
@@ -65,60 +71,84 @@ class DataBasketComponent extends StatelessWidget {
             itemCount: state.dataBasket.length,
             itemBuilder: (context, index) {
               final element = state.dataBasket[index];
-              return Dismissible(
-                key: UniqueKey(),
-                confirmDismiss: (direction) {
-                  return showCustomDeleteDialog(context);
-                },
-                onDismissed: (direction) {
-                  AppConstanse.messageWarning(
-                      "تم حذف ${element.wasteName} من السلة", context);
-                  context.read<BasketBloc>().add(
-                        DeleteBasketByWestEvent(element.wastId),
-                      );
-                },
-                child: GestureDetector(
-                  onTap: () {
-                    context
-                        .read<BasketBloc>()
-                        .add(ShowWasteDetEvent(element.wastId));
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: AppMargin.m30,
-                      vertical: AppMargin.m8,
-                    ),
-                    decoration: BoxDecoration(
-                        color: ColorManager.darkBink,
-                        borderRadius:
-                            BorderRadius.circular(AppBorderRadius.s15)),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: AppPadding.p8, horizontal: AppPadding.p8),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                element.count.toString(),
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                              Text(
-                                element.wasteName,
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                              const SizedBox.shrink(),
-                            ],
-                          ),
-                          SizedBox(height: 1.h),
-                          _listDet(element),
-                        ],
+              return Stack(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      context
+                          .read<BasketBloc>()
+                          .add(ShowWasteDetEvent(element.wastId));
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: AppMargin.m30,
+                        vertical: AppMargin.m8,
+                      ),
+                      decoration: BoxDecoration(
+                          color: ColorManager.darkBink,
+                          borderRadius:
+                              BorderRadius.circular(AppBorderRadius.s15)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: AppPadding.p8, horizontal: AppPadding.p8),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  element.count.toString(),
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
+                                Text(
+                                  element.wasteName,
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
+                                const SizedBox.shrink(),
+                              ],
+                            ),
+                            SizedBox(height: 1.h),
+                            _listDet(element),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: GestureDetector(
+                      onTap: () {
+                        showCustomDeleteDialog(context).then((value) {
+                          if (value) {
+                            AppConstanse.messageWarning(
+                                "تم حذف ${element.wasteName} من السلة",
+                                context);
+                            context.read<BasketBloc>().add(
+                                  DeleteBasketByWestEvent(element.wastId),
+                                );
+                          }
+                        });
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 4),
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            color: ColorManager.error,
+                            borderRadius:
+                                BorderRadius.circular(AppBorderRadius.s15)),
+                        child: Icon(
+                          Icons.delete_outline,
+                          color: ColorManager.white,
+                          size: 18.sp,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               );
             });
       },

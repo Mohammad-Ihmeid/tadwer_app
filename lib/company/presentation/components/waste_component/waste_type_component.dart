@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/company/domain/entities/waste_entities/waste.dart';
 import 'package:tadwer_app/company/presentation/components/waste_component/waste_det_component.dart';
 import 'package:tadwer_app/company/presentation/controller/waste_bloc/waste_bloc.dart';
@@ -54,18 +53,28 @@ class WasteTypeComponent extends StatelessWidget {
                   vertical: AppMargin.m8,
                 ),
                 decoration: BoxDecoration(
-                    color: ColorManager.darkBink,
+                    color: ColorManager.white,
                     borderRadius: BorderRadius.circular(AppBorderRadius.s15)),
-                padding: const EdgeInsets.all(AppPadding.p8),
                 child: Column(
                   children: [
-                    Center(
-                      child: Text(
-                        element.wasteName,
-                        style: Theme.of(context).textTheme.titleMedium,
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: ColorManager.white,
+                        boxShadow: const [
+                          BoxShadow(color: Colors.black, blurRadius: 2)
+                        ],
+                        borderRadius:
+                            BorderRadius.circular(AppBorderRadius.s15),
+                      ),
+                      child: Center(
+                        child: Text(
+                          element.wasteName,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
                       ),
                     ),
-                    SizedBox(height: 1.h),
                     _listDet(element),
                   ],
                 ),

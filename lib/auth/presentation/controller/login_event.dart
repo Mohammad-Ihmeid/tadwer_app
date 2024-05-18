@@ -18,3 +18,10 @@ class SplashCheckLogInEvent extends LoginEvent {
   @override
   List<Object?> get props => [];
 }
+
+class GetUserInfoEvent extends LoginEvent {
+  const GetUserInfoEvent();
+
+  @override
+  List<Object> get props => [];
+}

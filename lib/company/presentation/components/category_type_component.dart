@@ -58,44 +58,79 @@ class CategoryTypeComponent extends StatelessWidget {
                 ),
               );
             } else {
-              return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: state.categoryType.length,
-                  itemBuilder: (context, index) {
-                    final element = state.categoryType[index];
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => WasteScreen(
-                                categoryName: element.name,
-                                catId: element.catId,
+              return Expanded(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppPadding.p30),
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20,
+                      childAspectRatio: 1,
+                      crossAxisCount: 2,
+                    ),
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: state.categoryType.length,
+                    itemBuilder: (context, index) {
+                      final element = state.categoryType[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => WasteScreen(
+                                  categoryName: element.name,
+                                  catId: element.catId,
+                                ),
+                              ));
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: ColorManager.white,
+                              borderRadius:
+                                  BorderRadius.circular(AppBorderRadius.s20)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(AppPadding.p4),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 20.w,
+                                    child: Image.network(
+                                      element.catImg,
+                                      loadingBuilder:
+                                          (context, child, loadingProgress) {
+                                        return const CircularProgressIndicator(
+                                            color: ColorManager.darkBink);
+                                      },
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return Image.asset(
+                                          IconsAssets.userIcon,
+                                          color: ColorManager.darkBink,
+                                        );
+                                      },
+                                      color: ColorManager.darkBink,
+                                    ),
+                                  ),
+                                  Text(
+                                    element.name,
+                                    textAlign: TextAlign.center,
+                                    style:
+                                        Theme.of(context).textTheme.titleSmall,
+                                  ),
+                                ],
                               ),
-                            ));
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: AppMargin.m30,
-                          vertical: AppMargin.m8,
-                        ),
-                        decoration: BoxDecoration(
-                            color: ColorManager.darkBink,
-                            borderRadius:
-                                BorderRadius.circular(AppBorderRadius.s15)),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: AppPadding.p4),
-                          child: Center(
-                            child: Text(
-                              element.name,
-                              style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  });
+                      );
+                    },
+                  ),
+                ),
+              );
             }
         }
       },

@@ -15,6 +15,7 @@ class IconsAssets {
   static const String logoApp = "$iconPath/logo_app.png";
   static const String userIcon = "$iconPath/user.png";
   static const String errorImage = "$iconPath/error_icon.png";
+  static const String logout = "$iconPath/logout.png";
 
   //Home Icons
   static const String calendar = "$iconPath/calendar.png";

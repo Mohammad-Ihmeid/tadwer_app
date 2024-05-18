@@ -6,17 +6,24 @@ class OrderRequest extends Equatable {
   final int basketId;
   final List<int> daysNum;
   final int userId;
+  final String note;
 
   const OrderRequest({
     required this.basketId,
     required this.daysNum,
     required this.userId,
+    required this.note,
   });
 
   OrderModel toModel() {
-    return OrderModel(basketId: basketId, daysNum: daysNum, userId: userId);
+    return OrderModel(
+      basketId: basketId,
+      daysNum: daysNum,
+      userId: userId,
+      note: note,
+    );
   }
 
   @override
-  List<Object> get props => [basketId, daysNum, userId];
+  List<Object> get props => [basketId, daysNum, userId, note];
 }

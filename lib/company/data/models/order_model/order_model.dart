@@ -5,13 +5,15 @@ class OrderModel extends OrderRequest {
     required super.basketId,
     required super.daysNum,
     required super.userId,
+    required super.note,
   });
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> json = <String, dynamic>{};
+    json['daysNum'] = daysNum;
+    json['userId'] = userId;
     json['basketId'] = basketId;
-    json['DaysNum'] = daysNum;
-    json['UserId'] = userId;
+    json['note'] = note;
     return json;
   }
 }

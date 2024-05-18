@@ -4,7 +4,11 @@ class ApiConstance {
   //Users
   static String checkLogInPath(String name) =>
       "${baseURL}Users/CheckLogin?Name=$name";
+
   static String updateUser = "${baseURL}Users/UpdateUser";
+
+  static String getUserInfoPath(int uid) =>
+      "${baseURL}Users/GetProfileUserById/$uid";
 
   //Company
   static String allCompanyTypePath = "${baseURL}Company/GetAllCompanyType";

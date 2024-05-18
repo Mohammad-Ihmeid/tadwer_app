@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tadwer_app/company/presentation/components/category_type_component.dart';
 import 'package:tadwer_app/company/presentation/components/widget/custom_app_bar.dart';
-import 'package:tadwer_app/company/presentation/components/widget/custom_header.dart';
 import 'package:tadwer_app/company/presentation/controller/company_type_bloc/company_type_bloc.dart';
 import 'package:tadwer_app/core/services/services_locator.dart';
 import 'package:tadwer_app/core/utils/assets_manager.dart';
@@ -33,17 +32,17 @@ class CategoryScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  CustomAppBar.appBar(context: context, showBackIcon: false),
-                  BlocBuilder<CompanyTypeBloc, CompanyTypeState>(
-                    builder: (context, state) {
-                      return CustomHeader.customHeader(
-                        child: Text(
-                          state.companyName,
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                      );
-                    },
-                  ),
+                  CustomAppBar.appBar(context: context, showBackIcon: true),
+                  // BlocBuilder<CompanyTypeBloc, CompanyTypeState>(
+                  //   builder: (context, state) {
+                  //     return CustomHeader.customHeader(
+                  //       child: Text(
+                  //         state.companyName,
+                  //         style: Theme.of(context).textTheme.headlineMedium,
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
                   SizedBox(height: 5.h),
                   const CategoryTypeComponent(),
                 ],

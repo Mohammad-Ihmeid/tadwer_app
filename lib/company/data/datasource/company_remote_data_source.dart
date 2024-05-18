@@ -58,7 +58,7 @@ abstract class BaseCompanyRemoteDataSource {
 
   ////////////////////////////////////////////////////////////
 
-  Future<String> addOrder(AddOrderParameters parameters);
+  Future<bool> addOrder(AddOrderParameters parameters);
 }
 
 class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
@@ -316,7 +316,7 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
   }
 
   @override
-  Future<String> addOrder(AddOrderParameters parameters) async {
+  Future<bool> addOrder(AddOrderParameters parameters) async {
     debugPrint(json.encode(parameters.order.toModel().toJson()));
     final response = await http.post(
       Uri.parse(ApiConstance.addOrderPath),
@@ -329,7 +329,7 @@ class CompanyRemoteDataSource extends BaseCompanyRemoteDataSource {
 
     if (response.statusCode == 200) {
       var responseJson = json.decode(response.body);
-      return responseJson;
+      return responseJson['success'];
     } else {
       var responseJson = json.decode(response.body);
       throw RemoteExceptions(
