@@ -7,6 +7,8 @@ class ApiConstance {
 
   static String updateUser = "${baseURL}Users/UpdateUser";
 
+  static String signUpPath = "${baseURL}Users/AddUser";
+
   static String getUserInfoPath(int uid) =>
       "${baseURL}Users/GetProfileUserById/$uid";
 

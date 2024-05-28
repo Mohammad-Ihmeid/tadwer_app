@@ -9,6 +9,9 @@ class LoginState extends Equatable {
   final UserInfo userInfo;
   final RequestState userInfoState;
   final String userInfoError;
+  ///////////////////////////////////////
+  final SignInRequestState signUpState;
+  final String signUpError;
 
   const LoginState({
     this.user,
@@ -19,6 +22,9 @@ class LoginState extends Equatable {
     this.userInfo = const UserInfo.empty(),
     this.userInfoState = RequestState.loading,
     this.userInfoError = '',
+    ///////////////////////////////////////
+    this.signUpState = SignInRequestState.normal,
+    this.signUpError = '',
   });
 
   LoginState copyWith({
@@ -30,6 +36,9 @@ class LoginState extends Equatable {
     UserInfo? userInfo,
     RequestState? userInfoState,
     String? userInfoError,
+    ///////////////////////////////////////
+    SignInRequestState? signUpState,
+    String? signUpError,
   }) {
     return LoginState(
       user: user ?? this.user,
@@ -40,6 +49,9 @@ class LoginState extends Equatable {
       userInfo: userInfo ?? this.userInfo,
       userInfoState: userInfoState ?? this.userInfoState,
       userInfoError: userInfoError ?? this.userInfoError,
+      ///////////////////////////////////////
+      signUpState: signUpState ?? this.signUpState,
+      signUpError: signUpError ?? this.signUpError,
     );
   }
 
@@ -53,5 +65,8 @@ class LoginState extends Equatable {
         userInfo,
         userInfoState,
         userInfoError,
+        ///////////////////////////////////////
+        signUpState,
+        signUpError,
       ];
 }

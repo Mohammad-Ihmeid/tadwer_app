@@ -25,3 +25,22 @@ class GetUserInfoEvent extends LoginEvent {
   @override
   List<Object> get props => [];
 }
+
+class SignUpEvent extends LoginEvent {
+  final String userName;
+  final String password;
+  final String confirmPassword;
+
+  const SignUpEvent({
+    required this.userName,
+    required this.password,
+    required this.confirmPassword,
+  });
+
+  @override
+  List<Object> get props => [
+        userName,
+        password,
+        confirmPassword,
+      ];
+}

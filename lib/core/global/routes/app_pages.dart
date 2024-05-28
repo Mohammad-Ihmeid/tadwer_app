@@ -1,4 +1,5 @@
 import 'package:tadwer_app/auth/presentation/screens/log_in_screen.dart';
+import 'package:tadwer_app/auth/presentation/screens/sign_up_screes.dart';
 import 'package:tadwer_app/auth/presentation/screens/user_info_screen.dart';
 import 'package:tadwer_app/company/presentation/screens/basket_screen.dart';
 import 'package:tadwer_app/company/presentation/screens/category_screen.dart';
@@ -21,5 +22,6 @@ class AppPages {
     Routes.basket: (context) => const BasketScreen(),
     Routes.recyclingRequest: (context) => const RecyclingRequestScreen(),
     Routes.userInfo: (context) => const UserInfoScreen(),
+    Routes.signUp: (context) => const SignUp(),
   };
 }

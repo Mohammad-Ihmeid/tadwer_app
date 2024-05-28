@@ -6,6 +6,7 @@ import 'package:tadwer_app/auth/domain/entities/user.dart';
 import 'package:tadwer_app/auth/domain/entities/user_info.dart';
 import 'package:tadwer_app/auth/domain/usecases/check_login_usecase.dart';
 import 'package:tadwer_app/auth/domain/usecases/get_user_info_usecase.dart';
+import 'package:tadwer_app/auth/domain/usecases/sign_up_usecase.dart';
 import 'package:tadwer_app/core/usecase/base_usecase.dart';
 import 'package:tadwer_app/core/utils/enums.dart';
 
@@ -15,12 +16,57 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final CheckLogInUseCase checkLogInUseCase;
   final GetUserInfoUseCase getUserInfoUseCase;
+  final SignUpUseCase signUpUseCase;
 
-  LoginBloc(this.checkLogInUseCase, this.getUserInfoUseCase)
-      : super(const LoginState()) {
+  LoginBloc(
+    this.checkLogInUseCase,
+    this.getUserInfoUseCase,
+    this.signUpUseCase,
+  ) : super(const LoginState()) {
     on<CheckLogInEvent>(_checkLogInEvent);
     on<SplashCheckLogInEvent>(_splashCheckLogInEvent);
     on<GetUserInfoEvent>(_getUserInfoEvent);
+    on<SignUpEvent>(_signUpEvent);
+  }
+
+  FutureOr<void> _signUpEvent(event, emit) async {
+    emit(state.copyWith(signUpState: SignInRequestState.loading));
+    if (event.userName.isEmpty ||
+        event.password.isEmpty ||
+        event.confirmPassword.isEmpty) {
+      emit(
+        state.copyWith(
+          signUpState: SignInRequestState.error,
+          signUpError: 'الرجاء ملأ جميع الحقول',
+        ),
+      );
+    } else if (event.password != event.confirmPassword) {
+      emit(
+        state.copyWith(
+          signUpState: SignInRequestState.error,
+          signUpError: 'الرجاء التأكد من كتابة كلمة السر بشكل الصحيح',
+        ),
+      );
+    } else {
+      final result = await signUpUseCase(
+        SignUpParameters(
+          userName: event.userName,
+          password: event.password,
+        ),
+      );
+
+      result.fold(
+        (l) => emit(
+          state.copyWith(
+            signUpState: SignInRequestState.error,
+            signUpError: 'الرجاء التأكد من كتابة كلمة السر بشكل الصحيح',
+          ),
+        ),
+        (r) => emit(
+          state.copyWith(signUpState: SignInRequestState.success),
+        ),
+      );
+    }
   }
 
   FutureOr<void> _getUserInfoEvent(GetUserInfoEvent event, emit) async {

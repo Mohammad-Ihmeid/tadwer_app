@@ -9,12 +9,14 @@ abstract class Routes {
   static const basket = Paths.basket;
   static const recyclingRequest = Paths.recyclingRequest;
   static const userInfo = Paths.userInfo;
+  static const signUp = Paths.signUp;
 }
 
 abstract class Paths {
   //Auth
   static const splash = '/splash';
   static const logIn = '/logIn';
+  static const signUp = '/signUp';
   //Users
   static const companyType = '/companyType';
   static const categoryType = '/categoryType';

@@ -75,7 +75,7 @@ class LogInScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         children: [
           Text(
-            'CUSTOMER LOGIN',
+            'تسجيل الدخول',
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: ColorManager.white,
@@ -92,7 +92,7 @@ class LogInScreen extends StatelessWidget {
           SizedBox(height: 5.h),
           CustomTextField(
             controller: name,
-            hintText: "Email ID",
+            hintText: "اسم المستخدم",
             icon: Icons.email,
             suffixIcon: const SizedBox.shrink(),
             validator: (value) {
@@ -105,7 +105,7 @@ class LogInScreen extends StatelessWidget {
           SizedBox(height: 2.h),
           CustomTextField(
             controller: password,
-            hintText: "Password",
+            hintText: "كلمة السر",
             icon: Icons.lock,
             textInputAction: TextInputAction.done,
             suffixIcon: const SizedBox.shrink(),
@@ -115,6 +115,23 @@ class LogInScreen extends StatelessWidget {
               }
               return null;
             },
+          ),
+          SizedBox(height: 5.h),
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, Routes.signUp),
+            child: Row(
+              children: [
+                Text(
+                  'أنشاء حساب جديد',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                SizedBox(width: 2.w),
+                const Icon(
+                  Icons.arrow_forward,
+                  color: ColorManager.white,
+                ),
+              ],
+            ),
           ),
           SizedBox(height: 5.h),
           _logInButtom(context, name, password),
@@ -142,7 +159,7 @@ class LogInScreen extends StatelessWidget {
             decoration:
                 BoxDecoration(border: Border.all(color: ColorManager.white)),
             child: Text(
-              "LOGIN",
+              "الدخول",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.displaySmall,
             ),

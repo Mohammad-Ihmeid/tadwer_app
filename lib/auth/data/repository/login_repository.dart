@@ -5,6 +5,7 @@ import 'package:tadwer_app/auth/domain/entities/user.dart';
 import 'package:tadwer_app/auth/domain/entities/user_info.dart';
 import 'package:tadwer_app/auth/domain/repository/base_login_repository.dart';
 import 'package:tadwer_app/auth/domain/usecases/check_login_usecase.dart';
+import 'package:tadwer_app/auth/domain/usecases/sign_up_usecase.dart';
 import 'package:tadwer_app/core/error/exceptions.dart';
 import 'package:tadwer_app/core/error/failure.dart';
 import 'package:tadwer_app/core/usecase/base_usecase.dart';
@@ -28,6 +29,16 @@ class LogInRepository extends BaseLogInRepository {
   Future<Either<Failure, UserInfo>> getUserInfo(NoParameters parameters) async {
     try {
       final result = await baseAuthRemoteDataSource.getUserInfo(parameters);
+      return Right(result);
+    } on RemoteExceptions catch (failure) {
+      return Left(RemoteFailure(failure.errorMessageModel.errorMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> signUp(SignUpParameters parameters) async {
+    try {
+      final result = await baseAuthRemoteDataSource.signUp(parameters);
       return Right(result);
     } on RemoteExceptions catch (failure) {
       return Left(RemoteFailure(failure.errorMessageModel.errorMessage));
