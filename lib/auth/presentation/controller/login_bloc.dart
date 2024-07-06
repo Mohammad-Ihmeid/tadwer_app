@@ -37,7 +37,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(
         state.copyWith(
           signUpState: SignInRequestState.error,
-          signUpError: 'الرجاء ملأ جميع الحقول',
+          signUpError: 'الرجاء ملئ جميع الحقول',
         ),
       );
     } else if (event.password != event.confirmPassword) {

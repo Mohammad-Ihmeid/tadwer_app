@@ -34,11 +34,11 @@ class LogInScreen extends StatelessWidget {
               AppConstanse.messageWarning(state.errorMessage, context);
             } else if (state.requestState == SignInRequestState.success) {
               LoadingDialog.hide(context);
-              if (state.user!.compRef == 0) {
-                Navigator.pushReplacementNamed(context, Routes.companyType);
-              } else {
-                Navigator.pushReplacementNamed(context, Routes.categoryType);
-              }
+              // if (state.user!.compRef == 0) {
+              //   Navigator.pushReplacementNamed(context, Routes.companyType);
+              // } else {
+              Navigator.pushReplacementNamed(context, Routes.categoryType);
+              // }
             }
           },
           child: Stack(

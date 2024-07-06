@@ -82,6 +82,23 @@ class SignUp extends StatelessWidget {
                       suffixIcon: const SizedBox.shrink(),
                     ),
                     SizedBox(height: 5.h),
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Row(
+                        children: [
+                          Text(
+                            'تسجيل دخول',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          SizedBox(width: 2.w),
+                          const Icon(
+                            Icons.arrow_forward,
+                            color: ColorManager.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 5.h),
                     _signUpButtom(context, name, password, confirmPassword),
                   ],
                 ),
